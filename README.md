@@ -1,3 +1,3 @@
 # Goquery Examples
 
-make sure that you have `goquery` in your `GOPATH` (install: `go get -u -v github.com/PuerkitoBio/goquery`)
+`goquery` is required. If not installed, execute `go get -u -v github.com/PuerkitoBio/goquery`
