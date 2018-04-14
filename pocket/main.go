@@ -52,9 +52,14 @@ func saveToPocket(url string) {
 
 // Usage: go run *.go
 func main() {
+	/*
+	 */
 	handleJosuiWritings()
 	fmt.Println("Saved all posts from blog http://blog.josui.me")
 
 	handleYinWang()
 	fmt.Println("Saved all posts from blog http://www.yinwang.org/")
+
+	handleYinWangLofter()
+	fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
 }

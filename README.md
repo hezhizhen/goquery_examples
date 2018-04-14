@@ -10,3 +10,4 @@ save posts of blogs to my pocket.
 
 * http://blog.josui.me
 * http://www.yinwang.org
+* http://yinwang0.lofter.com/
