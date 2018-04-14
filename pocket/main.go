@@ -46,7 +46,7 @@ func saveToPocket(url string) {
 	req, err := http.Post("https://getpocket.com/v3/add", "application/json", bytes.NewReader(body))
 	handleError(err)
 	if req.StatusCode != 200 {
-		panic("fail to save the article to pocket whose url is: " + url)
+		panic(req.Status + " fail to save the article to pocket whose url is: " + url)
 	}
 }
 
