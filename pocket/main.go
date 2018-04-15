@@ -64,8 +64,11 @@ func main() {
 
 		handleLeetcodeArticle()
 		fmt.Println("Saved all posts from site https://leetcode.com/articles/")
+
+		handleMiaoHu()
+		fmt.Println("Saved all posts from blog https://miao.hu/")
 	*/
 
-	handleMiaoHu()
-	fmt.Println("Saved all posts from blog https://miao.hu/")
+	handleLepture()
+	fmt.Println("Saved all posts from blog https://lepture.com/")
 }
