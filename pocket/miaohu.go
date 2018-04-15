@@ -7,8 +7,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleMiaoHu() {
-	p := NewPocket()
+func handleMiaoHu(p Pocket) {
 	url := "https://miao.hu/"
 	doc, err := goquery.NewDocument(url)
 	handleError(err)

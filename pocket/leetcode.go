@@ -7,8 +7,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleLeetcodeArticle() {
-	p := NewPocket()
+func handleLeetcodeArticle(p Pocket) {
 	url := "https://leetcode.com/articles/?page=%d"
 	page := 1
 	for {

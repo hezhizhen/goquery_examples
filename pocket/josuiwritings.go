@@ -6,8 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleJosuiWritings() {
-	p := NewPocket()
+func handleJosuiWritings(p Pocket) {
 	blogURL := "http://blog.josui.me"
 	nextURL := "/archives/"
 	exist := true

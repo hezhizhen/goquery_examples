@@ -6,8 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleYinWang() {
-	p := NewPocket()
+func handleYinWang(p Pocket) {
 	url := "http://www.yinwang.org"
 	doc, err := goquery.NewDocument(url)
 	handleError(err)

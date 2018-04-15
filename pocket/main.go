@@ -95,27 +95,28 @@ func (p Pocket) AddMultiple(urls []string) {
 
 // Usage: go run *.go
 func main() {
+	p := NewPocket()
 	/*
 	 */
-	handleJosuiWritings()
+	handleJosuiWritings(p)
 	fmt.Println("Saved all posts from blog http://blog.josui.me")
 
-	handleYinWang()
+	handleYinWang(p)
 	fmt.Println("Saved all posts from blog http://www.yinwang.org/")
 
-	handleYinWangLofter()
+	handleYinWangLofter(p)
 	fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
 
-	handleLeetcodeArticle()
+	handleLeetcodeArticle(p)
 	fmt.Println("Saved all posts from site https://leetcode.com/articles/")
 
-	handleMiaoHu()
+	handleMiaoHu(p)
 	fmt.Println("Saved all posts from blog https://miao.hu/")
 
-	handleLepture()
+	handleLepture(p)
 	fmt.Println("Saved all posts from blog https://lepture.com/")
 
-	handleLiQi()
+	handleLiQi(p)
 	fmt.Println("Saved all posts from blog http://liqi.io/")
 
 }

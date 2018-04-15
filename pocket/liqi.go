@@ -6,8 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleLiQi() {
-	p := NewPocket()
+func handleLiQi(p Pocket) {
 	url := "http://liqi.io/"
 	total := 0
 	urls := []string{}

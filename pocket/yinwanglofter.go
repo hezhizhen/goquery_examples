@@ -6,8 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleYinWangLofter() {
-	p := NewPocket()
+func handleYinWangLofter(p Pocket) {
 	url := "http://yinwang0.lofter.com/?page=%d"
 	page := 1
 	for {

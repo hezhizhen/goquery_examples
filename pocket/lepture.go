@@ -6,8 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleLepture() {
-	p := NewPocket()
+func handleLepture(p Pocket) {
 	url := "https://lepture.com"
 	part := "/archive/"
 	for {
