@@ -43,6 +43,7 @@ func saveToPocket(url string) {
 		"consumer_key": "%s",
 		"access_token": "%s"
 	}`, url, auth.ConsumerKey, auth.AccessToken))
+	// add limit: 320 times/hour
 	req, err := http.Post("https://getpocket.com/v3/add", "application/json", bytes.NewReader(body))
 	handleError(err)
 	if req.StatusCode != 200 {
