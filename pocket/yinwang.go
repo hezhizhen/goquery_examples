@@ -7,6 +7,7 @@ import (
 )
 
 func handleYinWang() {
+	p := NewPocket()
 	url := "http://www.yinwang.org"
 	doc, err := goquery.NewDocument(url)
 	handleError(err)
@@ -17,7 +18,7 @@ func handleYinWang() {
 			panic("missing url for post")
 		}
 		postURL = fmt.Sprintf("%s%s", url, postURL)
-		saveToPocket(postURL)
+		p.Add(postURL)
 		fmt.Printf("Successfully saved article to pocket whose title is: %s\n", s.Find("a").Text())
 	})
 }

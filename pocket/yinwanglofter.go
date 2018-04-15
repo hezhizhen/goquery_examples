@@ -7,6 +7,7 @@ import (
 )
 
 func handleYinWangLofter() {
+	p := NewPocket()
 	url := "http://yinwang0.lofter.com/?page=%d"
 	page := 1
 	for {
@@ -19,7 +20,7 @@ func handleYinWangLofter() {
 			if !exist || postURL == "" {
 				panic("missing url for post")
 			}
-			saveToPocket(postURL)
+			p.Add(postURL)
 			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", title.Text())
 		})
 		if list.Length() < 10 {

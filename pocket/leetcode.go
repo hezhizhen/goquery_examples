@@ -8,6 +8,7 @@ import (
 )
 
 func handleLeetcodeArticle() {
+	p := NewPocket()
 	url := "https://leetcode.com/articles/?page=%d"
 	page := 1
 	for {
@@ -19,7 +20,7 @@ func handleLeetcodeArticle() {
 			if !exist {
 				panic("missing url")
 			}
-			saveToPocket(fmt.Sprintf("https://leetcode.com%s", postURL))
+			p.Add(fmt.Sprintf("https://leetcode.com%s", postURL))
 			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", strings.TrimSpace(s.Find("h4.media-heading").Text()))
 		})
 		if list.Length() < 10 {

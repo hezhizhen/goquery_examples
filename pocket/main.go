@@ -77,19 +77,6 @@ func (p Pocket) Add(url string) { // rate limit: 320 times/hour
 	}
 }
 
-func saveToPocket(url string) {
-	body := []byte(fmt.Sprintf(`{
-		"url": "%s",
-		"consumer_key": "%s",
-		"access_token": "%s"
-	}`, url, auth.ConsumerKey, auth.AccessToken))
-	req, err := http.Post("https://getpocket.com/v3/add", "application/json", bytes.NewReader(body))
-	handleError(err)
-	if req.StatusCode != 200 {
-		panic(req.Status + " fail to save the article to pocket whose url is: " + url)
-	}
-}
-
 type action struct {
 	Action string `json:"action"`
 	URL    string `json:"url"`
@@ -124,25 +111,26 @@ func saveMultipleToPocket(urls []string) {
 // Usage: go run *.go
 func main() {
 	/*
-		handleJosuiWritings()
-		fmt.Println("Saved all posts from blog http://blog.josui.me")
+	 */
+	handleJosuiWritings()
+	fmt.Println("Saved all posts from blog http://blog.josui.me")
 
-		handleYinWang()
-		fmt.Println("Saved all posts from blog http://www.yinwang.org/")
+	handleYinWang()
+	fmt.Println("Saved all posts from blog http://www.yinwang.org/")
 
-		handleYinWangLofter()
-		fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
+	handleYinWangLofter()
+	fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
 
-		handleLeetcodeArticle()
-		fmt.Println("Saved all posts from site https://leetcode.com/articles/")
+	handleLeetcodeArticle()
+	fmt.Println("Saved all posts from site https://leetcode.com/articles/")
 
-		handleMiaoHu()
-		fmt.Println("Saved all posts from blog https://miao.hu/")
+	handleMiaoHu()
+	fmt.Println("Saved all posts from blog https://miao.hu/")
 
-		handleLepture()
-		fmt.Println("Saved all posts from blog https://lepture.com/")
-	*/
+	handleLepture()
+	fmt.Println("Saved all posts from blog https://lepture.com/")
 
 	handleLiQi()
 	fmt.Println("Saved all posts from blog http://liqi.io/")
+
 }

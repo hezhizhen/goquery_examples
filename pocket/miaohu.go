@@ -8,6 +8,7 @@ import (
 )
 
 func handleMiaoHu() {
+	p := NewPocket()
 	url := "https://miao.hu/"
 	doc, err := goquery.NewDocument(url)
 	handleError(err)
@@ -17,7 +18,7 @@ func handleMiaoHu() {
 		if !exist {
 			panic("missing url")
 		}
-		saveToPocket(post)
+		p.Add(post)
 		time := s.Find("time").Text()
 		title := strings.TrimSpace(s.Text())
 		title = strings.TrimPrefix(title, time)

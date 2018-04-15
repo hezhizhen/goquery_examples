@@ -7,6 +7,7 @@ import (
 )
 
 func handleLepture() {
+	p := NewPocket()
 	url := "https://lepture.com"
 	part := "/archive/"
 	for {
@@ -18,7 +19,7 @@ func handleLepture() {
 			if !exist {
 				panic("missing url")
 			}
-			saveToPocket(url + post)
+			p.Add(url + post)
 			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", s.Find("h3").Text())
 		})
 		prev, exist := doc.Find("div.navigation.color").Find("a.prev").Attr("href")

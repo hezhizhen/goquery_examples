@@ -7,6 +7,7 @@ import (
 )
 
 func handleJosuiWritings() {
+	p := NewPocket()
 	blogURL := "http://blog.josui.me"
 	nextURL := "/archives/"
 	exist := true
@@ -22,7 +23,7 @@ func handleJosuiWritings() {
 				panic("url is missing")
 			}
 			url = fmt.Sprintf("http://blog.josui.me%s", url)
-			saveToPocket(url)
+			p.Add(url)
 			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", title.Text())
 		})
 		next := doc.Find("a.pagination-next")
