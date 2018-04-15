@@ -7,6 +7,7 @@ import (
 )
 
 func handleLiQi() {
+	p := NewPocket()
 	url := "http://liqi.io/"
 	total := 0
 	urls := []string{}
@@ -21,7 +22,7 @@ func handleLiQi() {
 			urls = append(urls, post)
 			total++
 		})
-		saveMultipleToPocket(urls)
+		p.AddMultiple(urls)
 		prev, exist := doc.Find("div.nav-previous a").Attr("href")
 		if !exist {
 			break

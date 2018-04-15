@@ -12,37 +12,19 @@ import (
 
 // read the article about how to get access token: http://www.cnblogs.com/febwave/p/4242333.html
 
-type Auth struct {
-	ConsumerKey string `json:"consumer_key"`
-	AccessToken string `json:"access_token"`
-}
-
-var auth = func() Auth {
-	f, err := os.Open("auth.json")
-	handleError(err)
-	defer f.Close()
-
-	bs, err := ioutil.ReadAll(f)
-	handleError(err)
-
-	a := Auth{}
-	if err := json.Unmarshal(bs, &a); err != nil {
-		panic(err)
-	}
-	return a
-}()
-
 func handleError(err error) {
 	if err != nil {
 		panic(err)
 	}
 }
 
+// Pocket holds some keys
 type Pocket struct {
 	ConsumerKey string `json:"consumer_key"`
 	AccessToken string `json:"access_token"`
 }
 
+// NewPocket creates a pocket structure for operations
 func NewPocket() Pocket {
 	f, err := os.Open("auth.json")
 	handleError(err)
@@ -58,7 +40,9 @@ func NewPocket() Pocket {
 	return p
 }
 
-func (p Pocket) Add(url string) { // rate limit: 320 times/hour
+// Add adds a url to pocket
+// rate limit: 320 times/hour
+func (p Pocket) Add(url string) {
 	body := struct {
 		ConsumerKey string `json:"consumer_key"`
 		AccessToken string `json:"access_token"`
@@ -82,7 +66,8 @@ type action struct {
 	URL    string `json:"url"`
 }
 
-func saveMultipleToPocket(urls []string) {
+// AddMultiple adds multiple urls at one time
+func (p Pocket) AddMultiple(urls []string) {
 	actions := []action{}
 	for _, url := range urls {
 		actions = append(actions, action{
@@ -95,8 +80,8 @@ func saveMultipleToPocket(urls []string) {
 		AccessToken string   `json:"access_token"`
 		Actions     []action `json:"actions"`
 	}{
-		ConsumerKey: auth.ConsumerKey,
-		AccessToken: auth.AccessToken,
+		ConsumerKey: p.ConsumerKey,
+		AccessToken: p.AccessToken,
 		Actions:     actions,
 	}
 	bs, err := json.Marshal(body)
