@@ -24,7 +24,7 @@ type Pocket struct {
 	AccessToken string `json:"access_token"`
 }
 
-// NewPocket creates a pocket structure for operations
+// NewPocket creates a Pocket structure for operations
 func NewPocket() Pocket {
 	f, err := os.Open("auth.json")
 	handleError(err)
@@ -97,28 +97,31 @@ func (p Pocket) AddMultiple(urls []string) {
 func main() {
 	p := NewPocket()
 	/*
-	 */
-	handleJosuiWritings(p)
-	fmt.Println("Saved all posts from blog http://blog.josui.me")
+		handleJosuiWritings(p)
+		fmt.Println("Saved all posts from blog http://blog.josui.me")
 
-	handleYinWang(p)
-	fmt.Println("Saved all posts from blog http://www.yinwang.org/")
+		handleYinWang(p)
+		fmt.Println("Saved all posts from blog http://www.yinwang.org/")
 
-	handleYinWangLofter(p)
-	fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
+		handleYinWangLofter(p)
+		fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
 
-	handleLeetcodeArticle(p)
-	fmt.Println("Saved all posts from site https://leetcode.com/articles/")
+		handleLeetcodeArticle(p)
+		fmt.Println("Saved all posts from site https://leetcode.com/articles/")
 
-	handleMiaoHu(p)
-	fmt.Println("Saved all posts from blog https://miao.hu/")
+		handleMiaoHu(p)
+		fmt.Println("Saved all posts from blog https://miao.hu/")
 
-	handleLepture(p)
-	fmt.Println("Saved all posts from blog https://lepture.com/")
+		handleLepture(p)
+		fmt.Println("Saved all posts from blog https://lepture.com/")
 
-	handleLiQi(p)
-	fmt.Println("Saved all posts from blog http://liqi.io/")
+		handleLiQi(p)
+		fmt.Println("Saved all posts from blog http://liqi.io/")
 
-	handleJannerChang(p)
-	fmt.Println("Saved all posts from blog http://jannerchang.bitcron.com/")
+		handleJannerChang(p)
+		fmt.Println("Saved all posts from blog http://jannerchang.bitcron.com/")
+	*/
+
+	handleTodoist(p)
+	fmt.Println("Saved all posts from blog https://blog.todoist.com/")
 }
