@@ -9,8 +9,8 @@ import (
 func handleLiQi(p Pocket) {
 	url := "http://liqi.io/"
 	total := 0
-	urls := []string{}
 	for {
+		urls := []string{}
 		doc, err := goquery.NewDocument(url)
 		handleError(err)
 		doc.Find("article[id]").Each(func(i int, s *goquery.Selection) {
@@ -22,11 +22,11 @@ func handleLiQi(p Pocket) {
 			total++
 		})
 		p.AddMultiple(urls)
+		fmt.Printf("Successfully saved %d articles to pocket in total\n", total)
 		prev, exist := doc.Find("div.nav-previous a").Attr("href")
 		if !exist {
 			break
 		}
-		fmt.Printf("Successfully saved %d articles to pocket in total\n", total)
 		url = prev
 	}
 }

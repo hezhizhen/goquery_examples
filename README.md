@@ -15,3 +15,4 @@ save posts of blogs to my pocket.
 * https://miao.hu/
 * https://lepture.com/
 * http://liqi.io/
+* http://jannerchang.bitcron.com/

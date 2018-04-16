@@ -119,4 +119,6 @@ func main() {
 	handleLiQi(p)
 	fmt.Println("Saved all posts from blog http://liqi.io/")
 
+	handleJannerChang(p)
+	fmt.Println("Saved all posts from blog http://jannerchang.bitcron.com/")
 }
