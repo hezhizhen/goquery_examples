@@ -6,8 +6,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleTodoist(p Pocket) {
-	url := "https://blog.todoist.com/"
+func handleTodoist(p Pocket, url string) {
 	for {
 		urls := []string{}
 		doc, err := goquery.NewDocument(url)

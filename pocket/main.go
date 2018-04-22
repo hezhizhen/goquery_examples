@@ -103,8 +103,18 @@ type Info struct {
 var sites = []Info{
 	{
 		URL:     "http://blog.josui.me",
-		Skip:    false,
+		Skip:    true,
 		Handler: handleJosuiWritings,
+	},
+	{
+		URL:     "http://www.yinwang.org",
+		Skip:    true,
+		Handler: handleYinWang, // TODO: update
+	},
+	{
+		URL:     "https://blog.todoist.com",
+		Skip:    true,
+		Handler: handleTodoist, // TODO: update
 	},
 }
 
@@ -122,27 +132,16 @@ func main() {
 		fmt.Println("Finished:", site.URL)
 	}
 	/*
-		handleYinWang(p, true)
-
 		handleYinWangLofter(p)
-		fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
 
 		handleLeetcodeArticle(p)
-		fmt.Println("Saved all posts from site https://leetcode.com/articles/")
 
 		handleMiaoHu(p)
-		fmt.Println("Saved all posts from blog https://miao.hu/")
 
 		handleLepture(p)
-		fmt.Println("Saved all posts from blog https://lepture.com/")
 
 		handleLiQi(p)
-		fmt.Println("Saved all posts from blog http://liqi.io/")
 
 		handleJannerChang(p)
-		fmt.Println("Saved all posts from blog http://jannerchang.bitcron.com/")
-
-		handleTodoist(p)
-		fmt.Println("Saved all posts from blog https://blog.todoist.com/")
 	*/
 }
