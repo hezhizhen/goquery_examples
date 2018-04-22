@@ -93,15 +93,36 @@ func (p Pocket) AddMultiple(urls []string) {
 	}
 }
 
+// Info stores some basic info for one site
+type Info struct {
+	URL     string               `json:"url"`
+	Skip    bool                 `json:"skip"`
+	Handler func(Pocket, string) `json:"handler"`
+}
+
+var sites = []Info{
+	{
+		URL:     "http://blog.josui.me",
+		Skip:    true,
+		Handler: handleJosuiWritings,
+	},
+}
+
 // Usage: go run *.go
 func main() {
 	p := NewPocket()
-	/*
-		handleJosuiWritings(p)
-		fmt.Println("Saved all posts from blog http://blog.josui.me")
 
-		handleYinWang(p)
-		fmt.Println("Saved all posts from blog http://www.yinwang.org/")
+	for _, site := range sites {
+		if site.Skip {
+			fmt.Println("Skipped:", site.URL)
+			continue
+		}
+		fmt.Println("Started:", site.URL)
+		site.Handler(p, site.URL)
+		fmt.Println("Finished:", site.URL)
+	}
+	/*
+		handleYinWang(p, true)
 
 		handleYinWangLofter(p)
 		fmt.Println("Saved all posts from blog http://yinwang0.lofter.com/")
@@ -120,8 +141,8 @@ func main() {
 
 		handleJannerChang(p)
 		fmt.Println("Saved all posts from blog http://jannerchang.bitcron.com/")
-	*/
 
-	handleTodoist(p)
-	fmt.Println("Saved all posts from blog https://blog.todoist.com/")
+		handleTodoist(p)
+		fmt.Println("Saved all posts from blog https://blog.todoist.com/")
+	*/
 }

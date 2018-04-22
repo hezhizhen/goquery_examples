@@ -6,7 +6,10 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleYinWang(p Pocket) {
+func handleYinWang(p Pocket, skip bool) {
+	if skip {
+		fmt.Println("Skip: http://www.yinwang.org")
+	}
 	url := "http://www.yinwang.org"
 	doc, err := goquery.NewDocument(url)
 	handleError(err)
@@ -20,4 +23,5 @@ func handleYinWang(p Pocket) {
 		p.Add(postURL)
 		fmt.Printf("Successfully saved article to pocket whose title is: %s\n", s.Find("a").Text())
 	})
+	fmt.Println("Saved all posts from blog http://www.yinwang.org/")
 }

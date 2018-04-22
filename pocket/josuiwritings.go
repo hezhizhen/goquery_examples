@@ -6,12 +6,14 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleJosuiWritings(p Pocket) {
-	blogURL := "http://blog.josui.me"
+// TODO: use AddMultiple
+// use next button in the home page
+// print titles in one page and page number
+func handleJosuiWritings(p Pocket, url string) {
 	nextURL := "/archives/"
 	exist := true
 	for {
-		doc, err := goquery.NewDocument(blogURL + nextURL)
+		doc, err := goquery.NewDocument(url + nextURL)
 		handleError(err)
 
 		list := doc.Find("div.archive").Find("div.post.archive")
