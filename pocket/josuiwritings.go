@@ -2,35 +2,39 @@ package main
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-// TODO: use AddMultiple
-// use next button in the home page
-// print titles in one page and page number
 func handleJosuiWritings(p Pocket, url string) {
-	nextURL := "/archives/"
-	exist := true
+	nextPart := "/"
+	page := 1
 	for {
-		doc, err := goquery.NewDocument(url + nextURL)
+		doc, err := goquery.NewDocument(url + nextPart)
 		handleError(err)
 
-		list := doc.Find("div.archive").Find("div.post.archive")
+		list := doc.Find("div.blog div.content article")
+		urls := []string{}
+		titles := []string{}
 		list.Each(func(i int, s *goquery.Selection) {
-			title := s.Find(".archive-title a")
-			url, exist := title.Attr("href")
-			if !exist || url == "" {
+			title := s.Find("h2.article-title a")
+			post, exist := title.Attr("href")
+			if !exist {
 				panic("url is missing")
 			}
-			url = fmt.Sprintf("http://blog.josui.me%s", url)
-			p.Add(url)
-			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", title.Text())
+			titles = append(titles, title.Text())
+			urls = append(urls, url+post)
 		})
-		next := doc.Find("a.pagination-next")
-		nextURL, exist = next.Attr("href")
+		p.AddMultiple(urls)
+		fmt.Printf("Haved saved %d articles in page %d:\n", len(titles), page)
+		fmt.Println(strings.Join(titles, "\n"))
+		next := doc.Find("nav.pagination a.pagination-next")
+		nextURL, exist := next.Attr("href")
 		if !exist {
 			break
 		}
+		nextPart = nextURL
+		page++
 	}
 }

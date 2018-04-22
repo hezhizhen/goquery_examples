@@ -103,7 +103,7 @@ type Info struct {
 var sites = []Info{
 	{
 		URL:     "http://blog.josui.me",
-		Skip:    true,
+		Skip:    false,
 		Handler: handleJosuiWritings,
 	},
 }
