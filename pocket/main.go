@@ -8,6 +8,8 @@ import (
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 // read the article about how to get access token: http://www.cnblogs.com/febwave/p/4242333.html
@@ -93,28 +95,61 @@ func (p Pocket) AddMultiple(urls []string) {
 	}
 }
 
+func (p Pocket) AddFake(urls []string) {
+	fmt.Println("Haved added: ", strings.Join(urls, "\n"))
+}
+
 // Info stores some basic info for one site
 type Info struct {
-	URL     string               `json:"url"`
-	Skip    bool                 `json:"skip"`
-	Handler func(Pocket, string) `json:"handler"`
+	URL       string                                    `json:"url"`
+	URLSuffix string                                    `json:"url_suffix"`
+	ListPath  string                                    `json:"list_path"`
+	NextPath  string                                    `json:"next_path"`
+	Skip      bool                                      `json:"skip"`
+	Handler   func(*goquery.Selection) (string, string) `json:"handler"`
 }
 
 var sites = []Info{
 	{
-		URL:     "http://blog.josui.me",
-		Skip:    true,
-		Handler: handleJosuiWritings,
+		URL:      "http://blog.josui.me",
+		ListPath: "div.blog div.content article",
+		NextPath: "nav.pagination a.pagination-next",
+		Skip:     true,
+		Handler:  handleJosuiWritings,
 	},
 	{
-		URL:     "http://www.yinwang.org",
-		Skip:    true,
-		Handler: handleYinWang, // TODO: update
+		URL:      "http://www.yinwang.org",
+		ListPath: "li.list-group-item.title",
+		Skip:     true,
+		Handler:  handleYinWang,
+	},
+	/*
+		handleYinWangLofter(p)
+		handleLeetcodeArticle(p)
+		handleMiaoHu(p)
+		handleLepture(p)
+		handleLiQi(p)
+	*/
+	{
+		URL:      "http://jannerchang.bitcron.com",
+		ListPath: "div.post_in_list",
+		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
+		Skip:     true,
+		Handler:  handleJannerChang,
 	},
 	{
-		URL:     "https://blog.todoist.com",
-		Skip:    true,
-		Handler: handleTodoist, // TODO: update
+		URL:      "https://blog.todoist.com",
+		ListPath: "article.tdb-article-slat",
+		NextPath: "div.tdb-pagination-holder a.next.page-numbers.nav__action",
+		Skip:     true,
+		Handler:  handleTodoist,
+	},
+	{
+		URL:       "https://mymorningroutine.com",
+		URLSuffix: "/routines/all/#continue-routine",
+		ListPath:  "div#js-archive-list div.card-img.card-img--archive",
+		Skip:      true,
+		Handler:   handleMyMorningRoutine,
 	},
 }
 
@@ -127,21 +162,42 @@ func main() {
 			fmt.Println("Skipped:", site.URL)
 			continue
 		}
+		fmt.Println()
 		fmt.Println("Started:", site.URL)
-		site.Handler(p, site.URL)
+		url := site.URL + site.URLSuffix
+		for {
+			doc, err := goquery.NewDocument(url)
+			handleError(err)
+
+			list := doc.Find(site.ListPath)
+			titles, urls := []string{}, []string{}
+			list.Each(func(i int, s *goquery.Selection) {
+				title, post := site.Handler(s)
+				titles = append(titles, title)
+				urls = append(urls, site.URL+post)
+			})
+
+			p.AddMultiple(urls)
+			// p.AddFake(urls)
+			fmt.Printf("Saved %d articles from site %s to Pocket\n", len(titles), url)
+			for i := range titles {
+				fmt.Printf("%d. %s (%s)\n", i+1, titles[i], urls[i])
+			}
+
+			if site.NextPath == "" {
+				break
+			}
+			next := doc.Find(site.NextPath)
+			nextURL, exist := next.Attr("href")
+			if !exist {
+				break
+			}
+			if strings.HasPrefix(nextURL, site.URL) {
+				url = nextURL
+				continue
+			}
+			url = site.URL + nextURL
+		}
 		fmt.Println("Finished:", site.URL)
 	}
-	/*
-		handleYinWangLofter(p)
-
-		handleLeetcodeArticle(p)
-
-		handleMiaoHu(p)
-
-		handleLepture(p)
-
-		handleLiQi(p)
-
-		handleJannerChang(p)
-	*/
 }
