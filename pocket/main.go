@@ -96,7 +96,7 @@ func (p Pocket) AddMultiple(urls []string) {
 }
 
 func (p Pocket) AddFake(urls []string) {
-	fmt.Println("Haved added: ", strings.Join(urls, "\n"))
+	fmt.Printf("[FAKE] Haved added %d articles\n", len(urls))
 }
 
 // Info stores some basic info for one site
@@ -150,6 +150,13 @@ var sites = []Info{
 		ListPath:  "div#js-archive-list div.card-img.card-img--archive",
 		Skip:      true,
 		Handler:   handleMyMorningRoutine,
+	},
+	{
+		URL:      "https://ulyssesapp.com/blog",
+		ListPath: "main#main article[id]",
+		NextPath: "nav.navigation.paging-navigation div.nav-previous a",
+		Skip:     true,
+		Handler:  handleUlysses,
 	},
 }
 
