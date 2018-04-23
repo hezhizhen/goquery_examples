@@ -181,7 +181,11 @@ func main() {
 			list.Each(func(i int, s *goquery.Selection) {
 				title, post := site.Handler(s)
 				titles = append(titles, title)
-				urls = append(urls, site.URL+post)
+				if strings.HasPrefix(post, site.URL) {
+					urls = append(urls, post)
+				} else {
+					urls = append(urls, site.URL+post)
+				}
 			})
 
 			p.AddMultiple(urls)
