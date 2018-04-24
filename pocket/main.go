@@ -158,6 +158,13 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleUlysses,
 	},
+	{
+		URL:       "https://www.scotthyoung.com/blog",
+		URLSuffix: "/articles",
+		ListPath:  "div#date-block ul li",
+		Skip:      true,
+		Handler:   handleScottHYoung,
+	},
 }
 
 // Usage: go run *.go
