@@ -165,6 +165,13 @@ var sites = []Info{
 		Skip:      true,
 		Handler:   handleScottHYoung,
 	},
+	{
+		URL:      "https://startupnextdoor.com",
+		ListPath: "main#content article[class]",
+		NextPath: "nav.pagination a.older-posts",
+		Skip:     false,
+		Handler:  handleStartUpNextDoor,
+	},
 }
 
 // Usage: go run *.go
