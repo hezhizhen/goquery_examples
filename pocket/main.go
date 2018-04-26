@@ -169,8 +169,15 @@ var sites = []Info{
 		URL:      "https://startupnextdoor.com",
 		ListPath: "main#content article[class]",
 		NextPath: "nav.pagination a.older-posts",
-		Skip:     false,
+		Skip:     true,
 		Handler:  handleStartUpNextDoor,
+	},
+	{
+		URL:      "https://blog.trello.com",
+		ListPath: "div.post-item",
+		NextPath: "div.blog-pagination a.next-posts-link",
+		Skip:     true,
+		Handler:  handleTrello,
 	},
 }
 
@@ -186,6 +193,7 @@ func main() {
 		fmt.Println()
 		fmt.Println("Started:", site.URL)
 		url := site.URL + site.URLSuffix
+		total := 0
 		for {
 			doc, err := goquery.NewDocument(url)
 			handleError(err)
@@ -200,6 +208,7 @@ func main() {
 				} else {
 					urls = append(urls, site.URL+post)
 				}
+				total++
 			})
 
 			p.AddMultiple(urls)
@@ -223,6 +232,6 @@ func main() {
 			}
 			url = site.URL + nextURL
 		}
-		fmt.Println("Finished:", site.URL)
+		fmt.Println("Finished:", site.URL, "( In all:", total, ")")
 	}
 }
