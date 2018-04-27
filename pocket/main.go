@@ -12,7 +12,8 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// read the article about how to get access token: http://www.cnblogs.com/febwave/p/4242333.html
+// read the article about how to get access token:
+// http://www.cnblogs.com/febwave/p/4242333.html
 
 func handleError(err error) {
 	if err != nil {
@@ -56,10 +57,14 @@ func (p Pocket) Add(url string) {
 	}
 	bs, err := json.Marshal(body)
 	handleError(err)
-	req, err := http.Post("https://getpocket.com/v3/add", "application/json", bytes.NewReader(bs))
+	req, err := http.Post(
+		"https://getpocket.com/v3/add",
+		"application/json",
+		bytes.NewReader(bs),
+	)
 	handleError(err)
 	if req.StatusCode != 200 {
-		panic(req.Status + " fail to save the article to pocket whose url is: " + url)
+		panic(req.Status + "fail to save the article to pocket whose url is:" + url)
 	}
 }
 
@@ -88,7 +93,11 @@ func (p Pocket) AddMultiple(urls []string) {
 	}
 	bs, err := json.Marshal(body)
 	handleError(err)
-	req, err := http.Post("https://getpocket.com/v3/send", "application/json", bytes.NewReader(bs))
+	req, err := http.Post(
+		"https://getpocket.com/v3/send",
+		"application/json",
+		bytes.NewReader(bs),
+	)
 	handleError(err)
 	if req.StatusCode != 200 {
 		panic(req.Status + " fail to save articles: " + strings.Join(urls, "\n"))
@@ -213,7 +222,8 @@ func main() {
 
 			p.AddMultiple(urls)
 			// p.AddFake(urls)
-			fmt.Printf("Saved %d articles from site %s to Pocket\n", len(titles), url)
+			fmt.Printf("Saved %d articles from site %s to Pocket\n",
+				len(titles), url)
 			for i := range titles {
 				fmt.Printf("%d. %s (%s)\n", i+1, titles[i], urls[i])
 			}
