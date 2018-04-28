@@ -6,13 +6,4 @@
 
 ## pocket
 
-save posts of blogs to my pocket.
-
-* http://blog.josui.me
-* http://www.yinwang.org
-* http://yinwang0.lofter.com/
-* https://leetcode.com/articles/
-* https://miao.hu/
-* https://lepture.com/
-* http://liqi.io/
-* http://jannerchang.bitcron.com/
+save all previous posts to my pocket and then subscribe to the sites in my Reeder.
