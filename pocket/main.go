@@ -188,6 +188,13 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleTrello,
 	},
+	{
+		URL:      "http://www.catcoder.com",
+		ListPath: "section#posts article",
+		NextPath: "nav.pagination a.extend.next",
+		Skip:     true,
+		Handler:  handleCatCoder,
+	},
 }
 
 // Usage: go run *.go
