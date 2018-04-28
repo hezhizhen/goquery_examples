@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -104,6 +105,7 @@ func (p Pocket) AddMultiple(urls []string) {
 	}
 }
 
+// AddFake is used to show number of articles
 func (p Pocket) AddFake(urls []string) {
 	fmt.Printf("[FAKE] Haved added %d articles\n", len(urls))
 }
@@ -115,6 +117,7 @@ type Info struct {
 	ListPath  string                                    `json:"list_path"`
 	NextPath  string                                    `json:"next_path"`
 	Skip      bool                                      `json:"skip"`
+	Fake      bool                                      `json:"fake"`
 	Handler   func(*goquery.Selection) (string, string) `json:"handler"`
 }
 
@@ -195,6 +198,14 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleCatCoder,
 	},
+	{
+		URL:      "https://www.waerfa.com",
+		ListPath: "main#main article[id]",
+		NextPath: "nav.navigation.posts-navigation div.nav-previous a",
+		Skip:     true,
+		Fake:     false,
+		Handler:  handleWaerfa,
+	},
 }
 
 // Usage: go run *.go
@@ -227,12 +238,16 @@ func main() {
 				total++
 			})
 
-			p.AddMultiple(urls)
-			// p.AddFake(urls)
-			fmt.Printf("Saved %d articles from site %s to Pocket\n",
-				len(titles), url)
+			if site.Fake {
+				p.AddFake(urls)
+			} else {
+				p.AddMultiple(urls)
+				time.Sleep(time.Minute) // avoid something
+			}
+			fmt.Printf("[%s] Saved %d articles from site %s to Pocket\n",
+				time.Now().Format("2006-01-02 15:04:05"), len(titles), url)
 			for i := range titles {
-				fmt.Printf("%d. %s (%s)\n", i+1, titles[i], urls[i])
+				fmt.Printf("                      %d. %s (%s)\n", i+1, titles[i], urls[i])
 			}
 
 			if site.NextPath == "" {
