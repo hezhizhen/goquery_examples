@@ -106,7 +106,6 @@ var sites = []Info{
 		ListPath: "main#main article[id]",
 		NextPath: "nav.navigation.posts-navigation div.nav-previous a",
 		Skip:     true,
-		Fake:     false,
 		Handler:  handleWaerfa,
 	},
 	{
@@ -114,7 +113,6 @@ var sites = []Info{
 		ListPath: "div.post-list div.mod-post",
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
 		Skip:     true,
-		Fake:     false,
 		Handler:  handleUneeWang,
 	},
 	{
@@ -122,8 +120,14 @@ var sites = []Info{
 		ListPath: "div.post",
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
 		Skip:     true,
-		Fake:     false,
 		Handler:  handleXiaomu,
+	},
+	{
+		URL:      "https://deans.site",
+		ListPath: "div.post_list div.post",
+		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
+		Skip:     true,
+		Handler:  handleDeansSite,
 	},
 }
 
