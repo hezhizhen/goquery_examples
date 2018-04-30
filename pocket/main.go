@@ -117,6 +117,14 @@ var sites = []Info{
 		Fake:     false,
 		Handler:  handleUneeWang,
 	},
+	{
+		URL:      "https://xiaomu.bitcron.com",
+		ListPath: "div.post",
+		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
+		Skip:     true,
+		Fake:     false,
+		Handler:  handleXiaomu,
+	},
 }
 
 // read the article about how to get access token:
