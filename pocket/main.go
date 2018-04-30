@@ -136,6 +136,13 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleAsianEfficiency,
 	},
+	{
+		URL:      "https://usesthis.com",
+		ListPath: "article.interviewee.h-card",
+		NextPath: "nav#paginator a#next",
+		Skip:     true,
+		Handler:  handleUseThis,
+	},
 }
 
 // read the article about how to get access token:
@@ -269,12 +276,13 @@ func main() {
 				p.AddFake(urls)
 			} else {
 				p.AddMultiple(urls)
-				time.Sleep(time.Minute) // avoid something
+				time.Sleep(time.Second) // avoid something
 			}
 			fmt.Printf("[%s] Saved %d articles from site %s to Pocket\n",
 				time.Now().Format("2006-01-02 15:04:05"), len(titles), url)
 			for i := range titles {
-				fmt.Printf("                      %d. %s (%s)\n", i+1, titles[i], urls[i])
+				fmt.Printf("                      %d. %s (%s)\n",
+					i+1, titles[i], urls[i])
 			}
 
 			if site.NextPath == "" {
