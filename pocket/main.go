@@ -13,103 +13,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-// read the article about how to get access token:
-// http://www.cnblogs.com/febwave/p/4242333.html
-
-func handleError(err error) {
-	if err != nil {
-		panic(err)
-	}
-}
-
-// Pocket holds some keys
-type Pocket struct {
-	ConsumerKey string `json:"consumer_key"`
-	AccessToken string `json:"access_token"`
-}
-
-// NewPocket creates a Pocket structure for operations
-func NewPocket() Pocket {
-	f, err := os.Open("auth.json")
-	handleError(err)
-	defer f.Close()
-
-	bs, err := ioutil.ReadAll(f)
-	handleError(err)
-
-	p := Pocket{}
-	if err := json.Unmarshal(bs, &p); err != nil {
-		panic(err)
-	}
-	return p
-}
-
-// Add adds a url to pocket
-// rate limit: 320 times/hour
-func (p Pocket) Add(url string) {
-	body := struct {
-		ConsumerKey string `json:"consumer_key"`
-		AccessToken string `json:"access_token"`
-		URL         string `json:"url"`
-	}{
-		ConsumerKey: p.ConsumerKey,
-		AccessToken: p.AccessToken,
-		URL:         url,
-	}
-	bs, err := json.Marshal(body)
-	handleError(err)
-	req, err := http.Post(
-		"https://getpocket.com/v3/add",
-		"application/json",
-		bytes.NewReader(bs),
-	)
-	handleError(err)
-	if req.StatusCode != 200 {
-		panic(req.Status + "fail to save the article to pocket whose url is:" + url)
-	}
-}
-
-type action struct {
-	Action string `json:"action"`
-	URL    string `json:"url"`
-}
-
-// AddMultiple adds multiple urls at one time
-func (p Pocket) AddMultiple(urls []string) {
-	actions := []action{}
-	for _, url := range urls {
-		actions = append(actions, action{
-			Action: "add",
-			URL:    url,
-		})
-	}
-	body := struct {
-		ConsumerKey string   `json:"consumer_key"`
-		AccessToken string   `json:"access_token"`
-		Actions     []action `json:"actions"`
-	}{
-		ConsumerKey: p.ConsumerKey,
-		AccessToken: p.AccessToken,
-		Actions:     actions,
-	}
-	bs, err := json.Marshal(body)
-	handleError(err)
-	req, err := http.Post(
-		"https://getpocket.com/v3/send",
-		"application/json",
-		bytes.NewReader(bs),
-	)
-	handleError(err)
-	if req.StatusCode != 200 {
-		panic(req.Status + " fail to save articles: " + strings.Join(urls, "\n"))
-	}
-}
-
-// AddFake is used to show number of articles
-func (p Pocket) AddFake(urls []string) {
-	fmt.Printf("[FAKE] Haved added %d articles\n", len(urls))
-}
-
 // Info stores some basic info for one site
 type Info struct {
 	URL       string                                    `json:"url"`
@@ -206,6 +109,111 @@ var sites = []Info{
 		Fake:     false,
 		Handler:  handleWaerfa,
 	},
+	{
+		URL:      "https://unee.wang",
+		ListPath: "div.post-list div.mod-post",
+		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
+		Skip:     true,
+		Fake:     false,
+		Handler:  handleUneeWang,
+	},
+}
+
+// read the article about how to get access token:
+// http://www.cnblogs.com/febwave/p/4242333.html
+
+func handleError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
+
+// Pocket holds some keys
+type Pocket struct {
+	ConsumerKey string `json:"consumer_key"`
+	AccessToken string `json:"access_token"`
+}
+
+// NewPocket creates a Pocket structure for operations
+func NewPocket() Pocket {
+	f, err := os.Open("auth.json")
+	handleError(err)
+	defer f.Close()
+
+	bs, err := ioutil.ReadAll(f)
+	handleError(err)
+
+	p := Pocket{}
+	if err := json.Unmarshal(bs, &p); err != nil {
+		panic(err)
+	}
+	return p
+}
+
+// Add adds a url to pocket
+// rate limit: 320 times/hour
+func (p Pocket) Add(url string) {
+	body := struct {
+		ConsumerKey string `json:"consumer_key"`
+		AccessToken string `json:"access_token"`
+		URL         string `json:"url"`
+	}{
+		ConsumerKey: p.ConsumerKey,
+		AccessToken: p.AccessToken,
+		URL:         url,
+	}
+	bs, err := json.Marshal(body)
+	handleError(err)
+	req, err := http.Post(
+		"https://getpocket.com/v3/add",
+		"application/json",
+		bytes.NewReader(bs),
+	)
+	handleError(err)
+	if req.StatusCode != 200 {
+		panic(req.Status + "fail to save the article to pocket whose url is:" + url)
+	}
+}
+
+type action struct {
+	Action string `json:"action"`
+	URL    string `json:"url"`
+}
+
+// AddMultiple adds multiple urls at one time
+func (p Pocket) AddMultiple(urls []string) {
+	actions := []action{}
+	for _, url := range urls {
+		actions = append(actions, action{
+			Action: "add",
+			URL:    url,
+		})
+	}
+	body := struct {
+		ConsumerKey string   `json:"consumer_key"`
+		AccessToken string   `json:"access_token"`
+		Actions     []action `json:"actions"`
+	}{
+		ConsumerKey: p.ConsumerKey,
+		AccessToken: p.AccessToken,
+		Actions:     actions,
+	}
+	bs, err := json.Marshal(body)
+	handleError(err)
+	req, err := http.Post(
+		"https://getpocket.com/v3/send",
+		"application/json",
+		bytes.NewReader(bs),
+	)
+	handleError(err)
+	if req.StatusCode != 200 {
+		panic(req.Status + " fail to save articles: " + strings.Join(urls, "\n"))
+	}
+}
+
+// AddFake is used to show number of articles
+func (p Pocket) AddFake(urls []string) {
+	fmt.Printf("[FAKE] Haved added %d articles\n", len(urls))
 }
 
 // Usage: go run *.go
