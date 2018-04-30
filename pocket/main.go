@@ -129,6 +129,13 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleDeansSite,
 	},
+	{
+		URL:      "http://www.asianefficiency.com/blog",
+		ListPath: "article[class]",
+		NextPath: "nav.archive.pagination div.next a",
+		Skip:     true,
+		Handler:  handleAsianEfficiency,
+	},
 }
 
 // read the article about how to get access token:
