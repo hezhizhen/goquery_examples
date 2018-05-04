@@ -149,6 +149,12 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleJez,
 	},
+	{
+		URL:      "http://wsfdl.com",
+		ListPath: "ul.post-list li",
+		Skip:     true,
+		Handler:  handleWsfdl,
+	},
 }
 
 // read the article about how to get access token:
