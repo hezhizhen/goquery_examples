@@ -143,6 +143,12 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleUseThis,
 	},
+	{
+		URL:      "https://blog.jez.io",
+		ListPath: "article.hentry div.entry-wrapper",
+		Skip:     true,
+		Handler:  handleJez,
+	},
 }
 
 // read the article about how to get access token:
