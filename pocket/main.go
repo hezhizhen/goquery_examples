@@ -155,6 +155,13 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleWsfdl,
 	},
+	{
+		URL:      "https://maqmodo.com",
+		ListPath: "div.blogpostcategory",
+		NextPath: "div.wp-pagenavi a.nextpostslink",
+		Skip:     true,
+		Handler:  handleMaqmodo,
+	},
 }
 
 // read the article about how to get access token:
