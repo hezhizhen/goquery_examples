@@ -162,6 +162,14 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleMaqmodo,
 	},
+	{
+		URL:       "https://productivityist.com",
+		URLSuffix: "/category/blog/",
+		ListPath:  "article[class]",
+		NextPath:  "li.pagination-next a",
+		Skip:      true,
+		Handler:   handleProductivityist,
+	},
 }
 
 // read the article about how to get access token:
@@ -295,7 +303,7 @@ func main() {
 				p.AddFake(urls)
 			} else {
 				p.AddMultiple(urls)
-				time.Sleep(time.Second) // avoid something
+				time.Sleep(time.Second * 10) // avoid something
 			}
 			fmt.Printf("[%s] Saved %d articles from site %s to Pocket\n",
 				time.Now().Format("2006-01-02 15:04:05"), len(titles), url)
