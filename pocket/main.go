@@ -17,6 +17,7 @@ import (
 type Info struct {
 	URL       string                                    `json:"url"`
 	URLSuffix string                                    `json:"url_suffix"`
+	StartURL  string                                    `json:"start_url"`
 	ListPath  string                                    `json:"list_path"`
 	NextPath  string                                    `json:"next_path"`
 	Skip      bool                                      `json:"skip"`
@@ -170,6 +171,13 @@ var sites = []Info{
 		Skip:      true,
 		Handler:   handleProductivityist,
 	},
+	{
+		URL:      "https://www.appinn.com",
+		ListPath: "div#spost div.spost.post",
+		NextPath: "div.navigation a.nextpostslink",
+		Skip:     true,
+		Handler:  handleAppinn,
+	},
 }
 
 // read the article about how to get access token:
@@ -282,6 +290,9 @@ func main() {
 		fmt.Println("Started:", site.URL)
 		url := site.URL + site.URLSuffix
 		total := 0
+		if site.StartURL != "" && url != site.StartURL {
+			url = site.StartURL
+		}
 		for {
 			doc, err := goquery.NewDocument(url)
 			handleError(err)
@@ -303,7 +314,7 @@ func main() {
 				p.AddFake(urls)
 			} else {
 				p.AddMultiple(urls)
-				time.Sleep(time.Second * 10) // avoid something
+				// time.Sleep(time.Second * 30) // avoid something
 			}
 			fmt.Printf("[%s] Saved %d articles from site %s to Pocket\n",
 				time.Now().Format("2006-01-02 15:04:05"), len(titles), url)
