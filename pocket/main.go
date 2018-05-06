@@ -178,6 +178,13 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleAppinn,
 	},
+	{
+		URL:       "http://gank.io",
+		URLSuffix: "/history",
+		ListPath:  "li div.row",
+		Skip:      true,
+		Handler:   handleGankIO,
+	},
 }
 
 // read the article about how to get access token:
