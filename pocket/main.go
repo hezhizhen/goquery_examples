@@ -23,6 +23,7 @@ type Info struct {
 	URLPath   string                                    `json:"url_path"`
 	NextPath  string                                    `json:"next_path"`
 	Skip      bool                                      `json:"skip"`
+	Handle    bool                                      `json:"handle"`
 	Fake      bool                                      `json:"fake"`
 	Handler   func(*goquery.Selection) (string, string) `json:"handler"`
 }
@@ -34,7 +35,25 @@ var sites = []Info{
 		TitlePath: "div.post-title a",
 		URLPath:   "div.post-title a",
 		NextPath:  "div.paginator a.extend.next",
-		Skip:      true,
+	},
+	{
+		URL:       "http://blog.yuelong.info",
+		ListPath:  "section#posts article[class]",
+		TitlePath: "h2 a",
+		URLPath:   "h2 a",
+		NextPath:  "div.alignleft a",
+	},
+	{
+		URL:       "http://onespiece.strikingly.com",
+		URLSuffix: "/blog/df60b9b6a7b",
+		NextPath:  "span.s-blog-footer-btn.s-blog-footer-previous a",
+	},
+	{
+		URL:       "http://gank.io",
+		URLSuffix: "/history",
+		ListPath:  "li div.row",
+		TitlePath: "a",
+		URLPath:   "a",
 	},
 	// now in descending order
 	{
@@ -189,26 +208,6 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleAppinn,
 	},
-	{
-		URL:       "http://gank.io",
-		URLSuffix: "/history",
-		ListPath:  "li div.row",
-		Skip:      true,
-		Handler:   handleGankIO,
-	},
-	{
-		URL:       "http://onespiece.strikingly.com",
-		URLSuffix: "/blog/df60b9b6a7b",
-		NextPath:  "span.s-blog-footer-btn.s-blog-footer-previous a",
-		Skip:      true,
-	},
-	{
-		URL:      "http://blog.yuelong.info",
-		ListPath: "section#posts article[class]",
-		NextPath: "div.alignleft a",
-		Skip:     true,
-		Handler:  handleYuelong,
-	},
 }
 
 // read the article about how to get access token:
@@ -313,7 +312,7 @@ func main() {
 	p := NewPocket()
 
 	for _, site := range sites {
-		if site.Skip {
+		if site.Skip || !site.Handle {
 			fmt.Println("Skipped:", site.URL)
 			continue
 		}
