@@ -191,6 +191,13 @@ var sites = []Info{
 		NextPath:  "span.s-blog-footer-btn.s-blog-footer-previous a",
 		Skip:      true,
 	},
+	{
+		URL:      "http://blog.yuelong.info",
+		ListPath: "section#posts article[class]",
+		NextPath: "div.alignleft a",
+		Skip:     true,
+		Handler:  handleYuelong,
+	},
 }
 
 // read the article about how to get access token:
