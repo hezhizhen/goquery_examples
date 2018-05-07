@@ -185,6 +185,12 @@ var sites = []Info{
 		Skip:      true,
 		Handler:   handleGankIO,
 	},
+	{
+		URL:       "http://onespiece.strikingly.com",
+		URLSuffix: "/blog/df60b9b6a7b",
+		NextPath:  "span.s-blog-footer-btn.s-blog-footer-previous a",
+		Skip:      true,
+	},
 }
 
 // read the article about how to get access token:
@@ -304,18 +310,24 @@ func main() {
 			doc, err := goquery.NewDocument(url)
 			handleError(err)
 
-			list := doc.Find(site.ListPath)
 			titles, urls := []string{}, []string{}
-			list.Each(func(i int, s *goquery.Selection) {
-				title, post := site.Handler(s)
-				titles = append(titles, title)
-				if strings.HasPrefix(post, site.URL) {
-					urls = append(urls, post)
-				} else {
-					urls = append(urls, site.URL+post)
-				}
+			if site.ListPath != "" {
+				list := doc.Find(site.ListPath)
+				list.Each(func(i int, s *goquery.Selection) {
+					title, post := site.Handler(s)
+					titles = append(titles, title)
+					if strings.HasPrefix(post, site.URL) {
+						urls = append(urls, post)
+					} else {
+						urls = append(urls, site.URL+post)
+					}
+					total++
+				})
+			} else {
+				urls = append(urls, url)
+				titles = append(titles, doc.Find("head title").Text())
 				total++
-			})
+			}
 
 			if site.Fake {
 				p.AddFake(urls)
