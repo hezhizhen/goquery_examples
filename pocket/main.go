@@ -19,6 +19,8 @@ type Info struct {
 	URLSuffix string                                    `json:"url_suffix"`
 	StartURL  string                                    `json:"start_url"`
 	ListPath  string                                    `json:"list_path"`
+	TitlePath string                                    `json:"title_path"`
+	URLPath   string                                    `json:"url_path"`
 	NextPath  string                                    `json:"next_path"`
 	Skip      bool                                      `json:"skip"`
 	Fake      bool                                      `json:"fake"`
@@ -26,6 +28,15 @@ type Info struct {
 }
 
 var sites = []Info{
+	{
+		URL:       "https://blog.brickgao.com",
+		ListPath:  "div.post-summary",
+		TitlePath: "div.post-title a",
+		URLPath:   "div.post-title a",
+		NextPath:  "div.paginator a.extend.next",
+		Skip:      true,
+	},
+	// now in descending order
 	{
 		URL:      "http://blog.josui.me",
 		ListPath: "div.blog div.content article",
@@ -306,7 +317,6 @@ func main() {
 			fmt.Println("Skipped:", site.URL)
 			continue
 		}
-		fmt.Println()
 		fmt.Println("Started:", site.URL)
 		url := site.URL + site.URLSuffix
 		total := 0
@@ -321,7 +331,20 @@ func main() {
 			if site.ListPath != "" {
 				list := doc.Find(site.ListPath)
 				list.Each(func(i int, s *goquery.Selection) {
-					title, post := site.Handler(s)
+					var title, post string
+					if site.Handler == nil {
+						var exist bool
+						post, exist = s.Find(site.URLPath).Attr("href")
+						if !exist {
+							panic("missing url")
+						}
+						title, exist = s.Find(site.TitlePath).Attr("title")
+						if !exist {
+							title = s.Find(site.TitlePath).Text()
+						}
+					} else {
+						title, post = site.Handler(s)
+					}
 					titles = append(titles, title)
 					if strings.HasPrefix(post, site.URL) {
 						urls = append(urls, post)
@@ -364,5 +387,6 @@ func main() {
 			url = site.URL + nextURL
 		}
 		fmt.Println("Finished:", site.URL, "( In all:", total, ")")
+		fmt.Println()
 	}
 }
