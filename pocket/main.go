@@ -55,6 +55,13 @@ var sites = []Info{
 		TitlePath: "a",
 		URLPath:   "a",
 	},
+	{
+		URL:       "https://www.appinn.com",
+		ListPath:  "div#spost div.spost.post",
+		TitlePath: "h2.entry-title a",
+		URLPath:   "h2.entry-title a",
+		NextPath:  "div.navigation a.nextpostslink",
+	},
 	// now in descending order
 	{
 		URL:      "http://blog.josui.me",
@@ -200,13 +207,6 @@ var sites = []Info{
 		NextPath:  "li.pagination-next a",
 		Skip:      true,
 		Handler:   handleProductivityist,
-	},
-	{
-		URL:      "https://www.appinn.com",
-		ListPath: "div#spost div.spost.post",
-		NextPath: "div.navigation a.nextpostslink",
-		Skip:     true,
-		Handler:  handleAppinn,
 	},
 }
 
