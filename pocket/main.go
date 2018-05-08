@@ -65,6 +65,13 @@ var sites = []Info{
 		URLPath:   "h2.entry-title a",
 		NextPath:  "li.pagination-next a",
 	},
+	{
+		URL:       "https://maqmodo.com",
+		ListPath:  "div.blogpostcategory",
+		TitlePath: "h2.title",
+		URLPath:   "h2.title a",
+		NextPath:  "div.wp-pagenavi a.nextpostslink",
+	},
 	// now in descending order
 	{
 		URL:      "http://blog.josui.me",
@@ -195,13 +202,6 @@ var sites = []Info{
 		ListPath: "ul.post-list li",
 		Skip:     true,
 		Handler:  handleWsfdl,
-	},
-	{
-		URL:      "https://maqmodo.com",
-		ListPath: "div.blogpostcategory",
-		NextPath: "div.wp-pagenavi a.nextpostslink",
-		Skip:     true,
-		Handler:  handleMaqmodo,
 	},
 }
 
