@@ -30,18 +30,16 @@ type Info struct {
 
 var sites = []Info{
 	{
-		URL:       "https://blog.brickgao.com",
-		ListPath:  "div.post-summary",
-		TitlePath: "div.post-title a",
-		URLPath:   "div.post-title a",
-		NextPath:  "div.paginator a.extend.next",
+		URL:      "https://blog.brickgao.com",
+		ListPath: "div.post-summary",
+		URLPath:  "div.post-title a",
+		NextPath: "div.paginator a.extend.next",
 	},
 	{
-		URL:       "http://blog.yuelong.info",
-		ListPath:  "section#posts article[class]",
-		TitlePath: "h2 a",
-		URLPath:   "h2 a",
-		NextPath:  "div.alignleft a",
+		URL:      "http://blog.yuelong.info",
+		ListPath: "section#posts article[class]",
+		URLPath:  "h2 a",
+		NextPath: "div.alignleft a",
 	},
 	{
 		URL:       "http://onespiece.strikingly.com",
@@ -52,15 +50,20 @@ var sites = []Info{
 		URL:       "http://gank.io",
 		URLSuffix: "/history",
 		ListPath:  "li div.row",
-		TitlePath: "a",
 		URLPath:   "a",
 	},
 	{
-		URL:       "https://www.appinn.com",
-		ListPath:  "div#spost div.spost.post",
-		TitlePath: "h2.entry-title a",
+		URL:      "https://www.appinn.com",
+		ListPath: "div#spost div.spost.post",
+		URLPath:  "h2.entry-title a",
+		NextPath: "div.navigation a.nextpostslink",
+	},
+	{
+		URL:       "https://productivityist.com",
+		URLSuffix: "/category/blog/",
+		ListPath:  "article[class]",
 		URLPath:   "h2.entry-title a",
-		NextPath:  "div.navigation a.nextpostslink",
+		NextPath:  "li.pagination-next a",
 	},
 	// now in descending order
 	{
@@ -200,14 +203,6 @@ var sites = []Info{
 		Skip:     true,
 		Handler:  handleMaqmodo,
 	},
-	{
-		URL:       "https://productivityist.com",
-		URLSuffix: "/category/blog/",
-		ListPath:  "article[class]",
-		NextPath:  "li.pagination-next a",
-		Skip:      true,
-		Handler:   handleProductivityist,
-	},
 }
 
 // read the article about how to get access token:
@@ -336,6 +331,9 @@ func main() {
 						post, exist = s.Find(site.URLPath).Attr("href")
 						if !exist {
 							panic("missing url")
+						}
+						if site.TitlePath == "" {
+							site.TitlePath = site.URLPath
 						}
 						title, exist = s.Find(site.TitlePath).Attr("title")
 						if !exist {
