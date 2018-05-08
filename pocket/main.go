@@ -72,6 +72,30 @@ var sites = []Info{
 		URLPath:   "h2.title a",
 		NextPath:  "div.wp-pagenavi a.nextpostslink",
 	},
+	{
+		URL:      "http://wsfdl.com", // 网址有中文
+		ListPath: "ul.post-list li",
+		URLPath:  "h2 a",
+	},
+	{
+		URL:      "https://blog.jez.io",
+		ListPath: "article.hentry div.entry-wrapper",
+		URLPath:  "h3.entry-title a",
+	},
+	{
+		URL:      "https://usesthis.com",
+		ListPath: "article.interviewee.h-card",
+		URLPath:  "h3 a",
+		NextPath: "nav#paginator a#next",
+	},
+	{
+		URL:       "http://www.asianefficiency.com", // something wrong
+		URLSuffix: "/blog",
+		ListPath:  "article[class]",
+		TitlePath: "h1",
+		URLPath:   "h1 a",
+		NextPath:  "nav.archive.pagination div.next a",
+	},
 	// now in descending order
 	{
 		URL:      "http://blog.josui.me",
@@ -176,32 +200,6 @@ var sites = []Info{
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
 		Skip:     true,
 		Handler:  handleDeansSite,
-	},
-	{
-		URL:      "http://www.asianefficiency.com/blog",
-		ListPath: "article[class]",
-		NextPath: "nav.archive.pagination div.next a",
-		Skip:     true,
-		Handler:  handleAsianEfficiency,
-	},
-	{
-		URL:      "https://usesthis.com",
-		ListPath: "article.interviewee.h-card",
-		NextPath: "nav#paginator a#next",
-		Skip:     true,
-		Handler:  handleUseThis,
-	},
-	{
-		URL:      "https://blog.jez.io",
-		ListPath: "article.hentry div.entry-wrapper",
-		Skip:     true,
-		Handler:  handleJez,
-	},
-	{
-		URL:      "http://wsfdl.com",
-		ListPath: "ul.post-list li",
-		Skip:     true,
-		Handler:  handleWsfdl,
 	},
 }
 
