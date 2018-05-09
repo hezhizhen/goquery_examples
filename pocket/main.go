@@ -103,6 +103,12 @@ var sites = []Info{
 		URLPath:   "h1 a",
 		NextPath:  "nav.archive.pagination div.next a",
 	},
+	{
+		URL:      "https://deans.site",
+		ListPath: "div.post_list div.post",
+		URLPath:  "div.post_title a",
+		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
+	},
 	// now in descending order
 	{
 		URL:      "http://blog.josui.me",
@@ -200,13 +206,6 @@ var sites = []Info{
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
 		Skip:     true,
 		Handler:  handleXiaomu,
-	},
-	{
-		URL:      "https://deans.site",
-		ListPath: "div.post_list div.post",
-		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
-		Skip:     true,
-		Handler:  handleDeansSite,
 	},
 }
 
