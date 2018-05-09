@@ -31,6 +31,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:       "http://blog.leanote.com",
+		URLSuffix: "/archives/carlking5019",
+		ListPath:  "div#posts div.each-post ul li",
+		URLPath:   "a",
+	},
+	{
 		URL:       "http://www.monkeyuser.com",
 		URLSuffix: "/toc/",
 		ListPath:  "div.toc div.toc-entry",
@@ -347,6 +353,7 @@ func main() {
 						if !exist {
 							title = s.Find(site.TitlePath).Text()
 						}
+						title = strings.TrimSpace(title)
 					} else {
 						title, post = site.Handler(s)
 					}
