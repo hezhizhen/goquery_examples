@@ -15,20 +15,27 @@ import (
 
 // Info stores some basic info for one site
 type Info struct {
-	URL       string                                    `json:"url"`
-	URLSuffix string                                    `json:"url_suffix"`
-	StartURL  string                                    `json:"start_url"`
-	ListPath  string                                    `json:"list_path"`
-	TitlePath string                                    `json:"title_path"`
-	URLPath   string                                    `json:"url_path"`
-	NextPath  string                                    `json:"next_path"`
-	Skip      bool                                      `json:"skip"`
-	Handle    bool                                      `json:"handle"`
-	Fake      bool                                      `json:"fake"`
-	Handler   func(*goquery.Selection) (string, string) `json:"handler"`
+	URL        string                                    `json:"url"`
+	URLSuffix  string                                    `json:"url_suffix"`
+	StartURL   string                                    `json:"start_url"`
+	ShowSource bool                                      `json:"show_source"`
+	ListPath   string                                    `json:"list_path"`
+	TitlePath  string                                    `json:"title_path"`
+	URLPath    string                                    `json:"url_path"`
+	NextPath   string                                    `json:"next_path"`
+	Skip       bool                                      `json:"skip"`
+	Handle     bool                                      `json:"handle"`
+	Fake       bool                                      `json:"fake"`
+	Handler    func(*goquery.Selection) (string, string) `json:"handler"`
 }
 
 var sites = []Info{
+	{
+		URL:       "http://www.monkeyuser.com",
+		URLSuffix: "/toc/",
+		ListPath:  "div.toc div.toc-entry",
+		URLPath:   "div.et div a[href]",
+	},
 	{
 		URL:      "https://blog.brickgao.com",
 		ListPath: "div.post-summary",
@@ -319,6 +326,10 @@ func main() {
 			doc, err := goquery.NewDocument(url)
 			handleError(err)
 
+			if site.ShowSource {
+				fmt.Printf("Source code for %s:\n", url)
+				fmt.Println(doc.Html())
+			}
 			titles, urls := []string{}, []string{}
 			if site.ListPath != "" {
 				list := doc.Find(site.ListPath)
@@ -382,6 +393,5 @@ func main() {
 			url = site.URL + nextURL
 		}
 		fmt.Println("Finished:", site.URL, "( In all:", total, ")")
-		fmt.Println()
 	}
 }
