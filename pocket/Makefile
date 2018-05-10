@@ -1,0 +1,2 @@
+save:
+	@go run *.go

@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:       "http://x-wei.github.io",
+		URLSuffix: "/archives.html",
+		ListPath:  "section#content div#archives p",
+		URLPath:   "a[class]",
+	},
+	{
 		URL:       "https://mymorningroutine.com",
 		URLSuffix: "/routines/all/#continue-routine",
 		ListPath:  "div#js-archive-list div.card-img.card-img--archive",
@@ -40,7 +46,7 @@ var sites = []Info{
 	{
 		URL:      "https://miao.hu",
 		ListPath: "li.mv2",
-		URLPath:  "a",
+		URLPath:  "a", // remove time in title
 	},
 	{
 		URL:           "http://yuezhu.org",
