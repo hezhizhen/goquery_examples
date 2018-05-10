@@ -15,21 +15,40 @@ import (
 
 // Info stores some basic info for one site
 type Info struct {
-	URL        string                                    `json:"url"`
-	URLSuffix  string                                    `json:"url_suffix"`
-	StartURL   string                                    `json:"start_url"`
-	ShowSource bool                                      `json:"show_source"`
-	ListPath   string                                    `json:"list_path"`
-	TitlePath  string                                    `json:"title_path"`
-	URLPath    string                                    `json:"url_path"`
-	NextPath   string                                    `json:"next_path"`
-	Skip       bool                                      `json:"skip"`
-	Handle     bool                                      `json:"handle"`
-	Fake       bool                                      `json:"fake"`
-	Handler    func(*goquery.Selection) (string, string) `json:"handler"`
+	URL           string                                    `json:"url"`
+	URLSuffix     string                                    `json:"url_suffix"`
+	StartURL      string                                    `json:"start_url"`
+	ShowSource    bool                                      `json:"show_source"`
+	ListPath      string                                    `json:"list_path"`
+	TitlePath     string                                    `json:"title_path"`
+	URLPath       string                                    `json:"url_path"`
+	NextPath      string                                    `json:"next_path"`
+	NextCondition string                                    `json:"next_condition"`
+	Skip          bool                                      `json:"skip"`
+	Handle        bool                                      `json:"handle"`
+	Fake          bool                                      `json:"fake"`
+	Handler       func(*goquery.Selection) (string, string) `json:"handler"`
 }
 
 var sites = []Info{
+	{
+		URL:       "https://mymorningroutine.com",
+		URLSuffix: "/routines/all/#continue-routine",
+		ListPath:  "div#js-archive-list div.card-img.card-img--archive",
+		URLPath:   "a.u-block",
+	},
+	{
+		URL:      "https://miao.hu",
+		ListPath: "li.mv2",
+		URLPath:  "a",
+	},
+	{
+		URL:           "http://yuezhu.org",
+		ListPath:      "section.entryTypePostExcerptContainer article[class]",
+		URLPath:       "h2.entryTitle a",
+		NextPath:      "div.posts-pagination a",
+		NextCondition: "span.previous-posts-link",
+	},
 	{
 		URL:       "http://blog.leanote.com",
 		URLSuffix: "/archives/carlking5019",
@@ -132,7 +151,6 @@ var sites = []Info{
 	/*
 		handleYinWangLofter(p)
 		handleLeetcodeArticle(p)
-		handleMiaoHu(p)
 		handleLepture(p)
 		handleLiQi(p)
 	*/
@@ -149,13 +167,6 @@ var sites = []Info{
 		NextPath: "div.tdb-pagination-holder a.next.page-numbers.nav__action",
 		Skip:     true,
 		Handler:  handleTodoist,
-	},
-	{
-		URL:       "https://mymorningroutine.com",
-		URLSuffix: "/routines/all/#continue-routine",
-		ListPath:  "div#js-archive-list div.card-img.card-img--archive",
-		Skip:      true,
-		Handler:   handleMyMorningRoutine,
 	},
 	{
 		URL:      "https://ulyssesapp.com/blog",
@@ -388,6 +399,9 @@ func main() {
 				break
 			}
 			next := doc.Find(site.NextPath)
+			if site.NextCondition != "" {
+				next = next.Has(site.NextCondition)
+			}
 			nextURL, exist := next.Attr("href")
 			if !exist {
 				break
