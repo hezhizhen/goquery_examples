@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "http://cyhsu.xyz",
+		ListPath: "div.content div.post-title",
+		URLPath:  "h3 a",
+		NextPath: "div.pagination li.next.pagbuttons a",
+	},
+	{
 		URL:       "http://x-wei.github.io",
 		URLSuffix: "/archives.html",
 		ListPath:  "section#content div#archives p",
