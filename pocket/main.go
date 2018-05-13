@@ -32,6 +32,13 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:           "https://www.iplaysoft.com",
+		ListPath:      "div#postlist div[class][itemtype]",
+		URLPath:       "div.entry-head h2.entry-title a",
+		NextPath:      "div.pagenavi-simple a",
+		NextCondition: "i.ipsicon.ipsicon-next.ipsicon-lspace",
+	},
+	{
 		URL:       "https://www.stevepavlina.com",
 		URLSuffix: "/archives",
 		ListPath:  "div.sya_container ul li",
