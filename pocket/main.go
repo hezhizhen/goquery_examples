@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://zapier.com/blog",
+		ListPath: "div.entries div.excerpt",
+		URLPath:  "h2.title a",
+		NextPath: "div.pagination div.page-nav a.next",
+	},
+	{
 		URL:       "http://www.markwk.com",
 		URLSuffix: "/blog/archives/",
 		ListPath:  "div#blog-archives article",
@@ -446,7 +452,12 @@ func main() {
 					if strings.HasPrefix(post, site.URL) {
 						urls = append(urls, post)
 					} else {
-						urls = append(urls, site.URL+post)
+						parts := strings.Split(post, "/")
+						if strings.HasSuffix(site.URL, parts[1]) {
+							urls = append(urls, strings.TrimSuffix(site.URL, "/"+parts[1])+post)
+						} else {
+							urls = append(urls, site.URL+post)
+						}
 					}
 					total++
 				})
