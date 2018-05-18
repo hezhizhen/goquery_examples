@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:       "http://www.markwk.com",
+		URLSuffix: "/blog/archives/",
+		ListPath:  "div#blog-archives article",
+		URLPath:   "h1 a",
+	},
+	{
 		URL:      "https://vickylai.com/verbose",
 		ListPath: "div#blog-link-list li",
 		URLPath:  "a.blog-post-link",
