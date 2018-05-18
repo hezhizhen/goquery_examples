@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:       "http://www.geekpreneur.com",
+		URLSuffix: "/archives-index",
+		ListPath:  "div.azindex ul li",
+		URLPath:   "a",
+	},
+	{
 		URL:      "https://www.do1618.com",
 		ListPath: "div#content article[id]",
 		URLPath:  "header.entry-header h1.entry-title a",
