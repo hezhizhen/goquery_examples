@@ -32,6 +32,13 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://unclutterer.com",
+		StartURL: "https://unclutterer.com/page/242/",
+		ListPath: "div.content.row article[class]",
+		URLPath:  "h2.entry-title a",
+		NextPath: "nav.post-nav li.previous a",
+	},
+	{
 		URL:      "http://www.leyafo.com",
 		ListPath: "article.post.post",
 		URLPath:  "h3.post-title a",
