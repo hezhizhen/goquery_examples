@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://scomper.me",
+		ListPath: "div.content div.post.animated.fadeInDown",
+		URLPath:  "h2 a",
+		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
+	},
+	{
 		URL:      "https://zapier.com/blog",
 		ListPath: "div.entries div.excerpt",
 		URLPath:  "h2.title a",
