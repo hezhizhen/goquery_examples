@@ -32,6 +32,13 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:       "http://www.carlpullein.com",
+		URLSuffix: "/blog",
+		ListPath:  "div#content div.main-content article[class]",
+		URLPath:   "div.post h1.entry-title a",
+		NextPath:  "nav.page.pagination li.next a#nextLink",
+	},
+	{
 		URL:      "http://haohailong.net",
 		ListPath: "div.posts div[id] div.post-inner div.post-header",
 		URLPath:  "h2.post-title a",
@@ -507,8 +514,14 @@ func main() {
 			if strings.HasPrefix(nextURL, site.URL) {
 				url = nextURL
 				continue
+			} else {
+				parts := strings.Split(nextURL, "/")
+				if strings.HasSuffix(site.URL, parts[1]) {
+					url = strings.TrimSuffix(site.URL, "/"+parts[1]) + nextURL
+				} else {
+					url = site.URL + nextURL
+				}
 			}
-			url = site.URL + nextURL
 		}
 		fmt.Println("Finished:", site.URL, "( In all:", total, ")")
 	}
