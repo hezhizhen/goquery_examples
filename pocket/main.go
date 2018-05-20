@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "http://haohailong.net",
+		ListPath: "div.posts div[id] div.post-inner div.post-header",
+		URLPath:  "h2.post-title a",
+		NextPath: "div.archive-nav a.post-nav-older",
+	},
+	{
 		URL:      "https://scomper.me",
 		ListPath: "div.content div.post.animated.fadeInDown",
 		URLPath:  "h2 a",
@@ -441,6 +447,7 @@ func main() {
 						var exist bool
 						post, exist = s.Find(site.URLPath).Attr("href")
 						if !exist {
+							fmt.Println(s.Html())
 							panic("missing url")
 						}
 						if site.TitlePath == "" {
