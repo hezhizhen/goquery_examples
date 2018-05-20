@@ -32,6 +32,12 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://blog.yitianshijie.net",
+		ListPath: "main#main article[id]",
+		URLPath:  "header.entry-header h1.entry-title a",
+		NextPath: "nav.paging-navigation div.nav-previous a",
+	},
+	{
 		URL:       "http://www.carlpullein.com",
 		URLSuffix: "/blog",
 		ListPath:  "div#content div.main-content article[class]",
