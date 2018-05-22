@@ -28,9 +28,26 @@ type Info struct {
 	Handle        bool                                      `json:"handle"`
 	Fake          bool                                      `json:"fake"`
 	Handler       func(*goquery.Selection) (string, string) `json:"handler"`
+	Handler2      func(string, Pocket)                      `json:"handler_2"`
 }
 
 var sites = []Info{
+	{
+		URL:      "http://www.ibtsat.com", // TODO:
+		Handler2: handleIBTSAT,
+	},
+	{
+		URL:      "http://appshere.bitcron.com",
+		Handler2: handleAppShere,
+	},
+	{
+		URL:      "https://jamesstuber.com",
+		Handler2: handleJamesStuber,
+	},
+	{
+		URL:      "https://hamberg.no/erlend",
+		Handler2: handleErlendHamberg,
+	},
 	{
 		URL:      "https://blog.yitianshijie.net",
 		ListPath: "main#main article[id]",
@@ -438,6 +455,10 @@ func main() {
 			continue
 		}
 		fmt.Println("Started:", site.URL)
+		if site.Handler2 != nil {
+			site.Handler2(site.URL, p)
+			continue
+		}
 		url := site.URL + site.URLSuffix
 		total := 0
 		if site.StartURL != "" && url != site.StartURL {
