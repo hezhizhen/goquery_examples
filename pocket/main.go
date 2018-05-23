@@ -17,8 +17,6 @@ import (
 type Info struct {
 	URL           string                                    `json:"url"`
 	URLSuffix     string                                    `json:"url_suffix"`
-	StartURL      string                                    `json:"start_url"`
-	ShowSource    bool                                      `json:"show_source"`
 	ListPath      string                                    `json:"list_path"`
 	TitlePath     string                                    `json:"title_path"`
 	URLPath       string                                    `json:"url_path"`
@@ -26,7 +24,6 @@ type Info struct {
 	NextCondition string                                    `json:"next_condition"`
 	Skip          bool                                      `json:"skip"`
 	Handle        bool                                      `json:"handle"`
-	Fake          bool                                      `json:"fake"`
 	Handler       func(*goquery.Selection) (string, string) `json:"handler"`
 	Handler2      func(string, Pocket)                      `json:"handler_2"`
 }
@@ -121,7 +118,6 @@ var sites = []Info{
 	},
 	{
 		URL:      "https://unclutterer.com",
-		StartURL: "https://unclutterer.com/page/242/",
 		ListPath: "div.content.row article[class]",
 		URLPath:  "h2.entry-title a",
 		NextPath: "nav.post-nav li.previous a",
@@ -456,11 +452,6 @@ func (p Pocket) AddMultiple(urls []string) {
 	}
 }
 
-// AddFake is used to show number of articles
-func (p Pocket) AddFake(urls []string) {
-	fmt.Printf("[FAKE] Haved added %d articles\n", len(urls))
-}
-
 // Usage: go run *.go
 func main() {
 	p := NewPocket()
@@ -477,17 +468,10 @@ func main() {
 		}
 		url := site.URL + site.URLSuffix
 		total := 0
-		if site.StartURL != "" && url != site.StartURL {
-			url = site.StartURL
-		}
 		for {
 			doc, err := goquery.NewDocument(url)
 			handleError(err)
 
-			if site.ShowSource {
-				fmt.Printf("Source code for %s:\n", url)
-				fmt.Println(doc.Html())
-			}
 			titles, urls := []string{}, []string{}
 			if site.ListPath != "" {
 				list := doc.Find(site.ListPath)
@@ -530,12 +514,7 @@ func main() {
 				total++
 			}
 
-			if site.Fake {
-				p.AddFake(urls)
-			} else {
-				p.AddMultiple(urls)
-				// time.Sleep(time.Second * 30) // avoid something
-			}
+			p.AddMultiple(urls)
 			fmt.Printf("[%s] Saved %d articles from site %s to Pocket\n",
 				time.Now().Format("2006-01-02 15:04:05"), len(titles), url)
 			for i := range titles {
