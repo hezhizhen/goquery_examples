@@ -30,6 +30,10 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "http://nladuo.github.io/",
+		Handler2: handleNladuo,
+	},
+	{
 		URL:      "http://misscaffeinated.com",
 		Handler2: handleMissCaffeinated,
 	},
