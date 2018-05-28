@@ -6,25 +6,28 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleLepture(p Pocket) {
-	url := "https://lepture.com"
-	part := "/archive/"
+func handleLepture(url string, p Pocket) {
+	var urls []string
+	suffix := "/archive/"
 	for {
-		doc, err := goquery.NewDocument(url + part)
+		doc, err := goquery.NewDocument(url + suffix)
 		handleError(err)
-		list := doc.Find("div[id][class]")
+		list := doc.Find("div.item.Article")
 		list.Each(func(i int, s *goquery.Selection) {
-			post, exist := s.Find("a").Attr("href")
+			href, exist := s.Find("a").Attr("href")
 			if !exist {
 				panic("missing url")
 			}
-			p.Add(url + post)
-			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", s.Find("h3").Text())
+			urls = append(urls, url+href)
 		})
-		prev, exist := doc.Find("div.navigation.color").Find("a.prev").Attr("href")
+		prev, exist := doc.Find("div.navigation.color a.prev").Attr("href")
 		if !exist {
 			break
 		}
-		part = prev
+		suffix = prev
+	}
+	p.AddMultiple(urls)
+	for i := range urls {
+		fmt.Printf("%2d: %s\n", i+1, urls[i])
 	}
 }

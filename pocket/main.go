@@ -30,6 +30,10 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://lepture.com",
+		Handler2: handleLepture,
+	},
+	{
 		URL:      "https://leetcode.com/articles",
 		Handler2: handleLeetcodeArticle,
 	},
@@ -300,7 +304,6 @@ var sites = []Info{
 	},
 	/*
 		handleYinWangLofter(p)
-		handleLepture(p)
 		handleLiQi(p)
 	*/
 	{
