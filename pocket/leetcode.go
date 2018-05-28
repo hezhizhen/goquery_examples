@@ -2,29 +2,32 @@ package main
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleLeetcodeArticle(p Pocket) {
-	url := "https://leetcode.com/articles/?page=%d"
-	page := 1
+func handleLeetcodeArticle(url string, p Pocket) {
+	var urls []string
+	var suffix string
 	for {
-		doc, err := goquery.NewDocument(fmt.Sprintf(url, page))
+		doc, err := goquery.NewDocument(url + suffix)
 		handleError(err)
 		list := doc.Find("a.list-group-item")
 		list.Each(func(i int, s *goquery.Selection) {
-			postURL, exist := s.Attr("href")
+			href, exist := s.Attr("href")
 			if !exist {
 				panic("missing url")
 			}
-			p.Add(fmt.Sprintf("https://leetcode.com%s", postURL))
-			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", strings.TrimSpace(s.Find("h4.media-heading").Text()))
+			urls = append(urls, "https://leetcode.com"+href)
 		})
-		if list.Length() < 10 {
+		next, exist := doc.Find("nav li.next a").Attr("href")
+		if !exist {
 			break
 		}
-		page++
+		suffix = next
+	}
+	p.AddMultiple(urls)
+	for i := range urls {
+		fmt.Printf("%3d: %s\n", i+1, urls[i])
 	}
 }
