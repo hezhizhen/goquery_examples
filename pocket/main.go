@@ -30,6 +30,10 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "http://gravitysworm.com",
+		Handler2: handleGravitySworm,
+	},
+	{
 		URL:      "https://blog.golang.org",
 		Handler2: handleGolangBlog,
 	},
@@ -472,7 +476,7 @@ func (p Pocket) AddMultiple(urls []string) {
 	if req.StatusCode != 200 {
 		panic(req.Status + " fail to save articles: " + strings.Join(urls, "\n"))
 	}
-	fmt.Printf("[%s] Added done.\n", time.Now().Format(time.RFC3339))
+	fmt.Printf("[%s] Added %d articles done.\n", time.Now().Format(time.RFC3339), len(urls))
 }
 
 // Usage: go run *.go
