@@ -29,81 +29,28 @@ type Info struct {
 }
 
 var sites = []Info{
-	{
-		URL:      "https://sheepbao.github.io",
-		Handler2: handleSheepBao,
-	},
-	{
-		URL:      "https://blog.agilebits.com",
-		Handler2: handleAgilebits,
-	},
-	{
-		URL:      "https://www.macstories.net",
-		Handler2: handleMacStories,
-	},
-	{
-		URL:      "https://blog.ropnop.com",
-		Handler2: handleRopnop,
-	},
-	{
-		URL:      "http://gravitysworm.com",
-		Handler2: handleGravitySworm,
-	},
-	{
-		URL:      "https://blog.golang.org",
-		Handler2: handleGolangBlog,
-	},
-	{
-		URL:      "https://lepture.com",
-		Handler2: handleLepture,
-	},
-	{
-		URL:      "https://leetcode.com/articles",
-		Handler2: handleLeetcodeArticle,
-	},
-	{
-		URL:      "http://www.flysnow.org",
-		Handler2: handleFlySnow,
-	},
-	{
-		URL:      "http://sanyuesha.com",
-		Handler2: handleSanYueSha,
-	},
-	{
-		URL:      "http://nladuo.github.io/",
-		Handler2: handleNladuo,
-	},
-	{
-		URL:      "http://misscaffeinated.com",
-		Handler2: handleMissCaffeinated,
-	},
-	{
-		URL:      "https://marcjenkins.co.uk",
-		Handler2: handleMarcJenkins,
-	},
-	{
-		URL:      "https://joecieplinski.com",
-		Handler2: handleJoecieplinski,
-	},
-	{
-		URL:      "https://cindysss.com",
-		Handler2: handleCindysss,
-	},
+	{URL: "https://lepture.com", Handler2: handleLepture},
+	{URL: "https://cindysss.com", Handler2: handleCindysss},
+	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
+	{URL: "http://www.flysnow.org", Handler2: handleFlySnow},
+	{URL: "https://dave.cheney.net", Handler2: handleCheney},
+	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
+	{URL: "http://gravitysworm.com", Handler2: handleGravitySworm},
+	{URL: "https://blog.golang.org", Handler2: handleGolangBlog},
+	{URL: "https://jamesstuber.com", Handler2: handleJamesStuber},
+	{URL: "http://nladuo.github.io/", Handler2: handleNladuo},
+	{URL: "https://marcjenkins.co.uk", Handler2: handleMarcJenkins},
+	{URL: "https://joecieplinski.com", Handler2: handleJoecieplinski},
+	{URL: "https://hamberg.no/erlend", Handler2: handleErlendHamberg},
+	{URL: "https://sheepbao.github.io", Handler2: handleSheepBao},
+	{URL: "https://blog.agilebits.com", Handler2: handleAgilebits},
+	{URL: "http://misscaffeinated.com", Handler2: handleMissCaffeinated},
+	{URL: "https://www.macstories.net", Handler2: handleMacStories},
+	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
+	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{
 		URL:      "http://www.ibtsat.com", // TODO:
 		Handler2: handleIBTSAT,
-	},
-	{
-		URL:      "http://appshere.bitcron.com",
-		Handler2: handleAppShere,
-	},
-	{
-		URL:      "https://jamesstuber.com",
-		Handler2: handleJamesStuber,
-	},
-	{
-		URL:      "https://hamberg.no/erlend",
-		Handler2: handleErlendHamberg,
 	},
 	{
 		URL:      "https://blog.yitianshijie.net",
