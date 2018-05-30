@@ -30,6 +30,10 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://blog.agilebits.com",
+		Handler2: handleAgilebits,
+	},
+	{
 		URL:      "https://www.macstories.net",
 		Handler2: handleMacStories,
 	},
@@ -493,7 +497,7 @@ func main() {
 
 	for _, site := range sites {
 		if site.Skip || !site.Handle {
-			fmt.Println("Skipped:", site.URL)
+			fmt.Printf("Skipped: %s\n", site.URL)
 			continue
 		}
 		fmt.Println("Started:", site.URL)
