@@ -30,6 +30,10 @@ type Info struct {
 
 var sites = []Info{
 	{
+		URL:      "https://blog.ropnop.com",
+		Handler2: handleRopnop,
+	},
+	{
 		URL:      "http://gravitysworm.com",
 		Handler2: handleGravitySworm,
 	},
