@@ -32,6 +32,7 @@ var sites = []Info{
 	{URL: "https://lepture.com", Handler2: handleLepture},
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
+	{URL: "http://www.ibtsat.com", Handler2: handleIBTSAT}, // TODO: not yet
 	{URL: "http://www.flysnow.org", Handler2: handleFlySnow},
 	{URL: "https://dave.cheney.net", Handler2: handleCheney},
 	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
@@ -48,10 +49,7 @@ var sites = []Info{
 	{URL: "https://www.macstories.net", Handler2: handleMacStories},
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
-	{
-		URL:      "http://www.ibtsat.com", // TODO:
-		Handler2: handleIBTSAT,
-	},
+	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
 	{
 		URL:      "https://blog.yitianshijie.net",
 		ListPath: "main#main article[id]",
