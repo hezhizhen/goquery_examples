@@ -36,17 +36,18 @@ var sites = []Info{
 	{URL: "http://www.flysnow.org", Handler2: handleFlySnow},
 	{URL: "https://dave.cheney.net", Handler2: handleCheney},
 	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
-	{URL: "http://gravitysworm.com", Handler2: handleGravitySworm},
 	{URL: "https://blog.golang.org", Handler2: handleGolangBlog},
 	{URL: "https://jamesstuber.com", Handler2: handleJamesStuber},
+	{URL: "http://gravitysworm.com", Handler2: handleGravitySworm},
 	{URL: "http://nladuo.github.io/", Handler2: handleNladuo},
 	{URL: "https://marcjenkins.co.uk", Handler2: handleMarcJenkins},
 	{URL: "https://joecieplinski.com", Handler2: handleJoecieplinski},
 	{URL: "https://hamberg.no/erlend", Handler2: handleErlendHamberg},
 	{URL: "https://sheepbao.github.io", Handler2: handleSheepBao},
 	{URL: "https://blog.agilebits.com", Handler2: handleAgilebits},
-	{URL: "http://misscaffeinated.com", Handler2: handleMissCaffeinated},
 	{URL: "https://www.macstories.net", Handler2: handleMacStories},
+	{URL: "http://yinwang0.lofter.com", Handler2: handleYinWangLofter},
+	{URL: "http://misscaffeinated.com", Handler2: handleMissCaffeinated},
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
@@ -272,7 +273,6 @@ var sites = []Info{
 		Handler:  handleYinWang,
 	},
 	/*
-		handleYinWangLofter(p)
 		handleLiQi(p)
 	*/
 	{

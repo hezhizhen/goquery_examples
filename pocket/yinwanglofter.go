@@ -6,25 +6,29 @@ import (
 	"github.com/PuerkitoBio/goquery"
 )
 
-func handleYinWangLofter(p Pocket) {
-	url := "http://yinwang0.lofter.com/?page=%d"
-	page := 1
+func handleYinWangLofter(url string, p Pocket) {
+	var urls []string
+	var suffix string
 	for {
-		doc, err := goquery.NewDocument(fmt.Sprintf(url, page))
+		fmt.Println(url + suffix)
+		doc, err := goquery.NewDocument(url + suffix)
 		handleError(err)
-		list := doc.Find("div.m-post.m-post-txt")
+		list := doc.Find("div.m-postlst div.m-post.m-post-txt")
 		list.Each(func(i int, s *goquery.Selection) {
-			title := s.Find("h2.ttl")
-			postURL, exist := title.Find("a").Attr("href")
-			if !exist || postURL == "" {
-				panic("missing url for post")
+			href, exist := s.Find("h2.ttl a").Attr("href")
+			if !exist {
+				panic("missing url")
 			}
-			p.Add(postURL)
-			fmt.Printf("Successfully saved article to pocket whose title is: %s\n", title.Text())
+			urls = append(urls, href)
 		})
-		if list.Length() < 10 {
+		next, exist := doc.Find("div.m-pager.m-pager-idx.box a.next").Attr("href")
+		if !exist {
 			break
 		}
-		page++
+		suffix = next
+	}
+	p.AddMultiple(urls)
+	for i := range urls {
+		fmt.Printf("%3d: %s\n", i+1, urls[i])
 	}
 }
