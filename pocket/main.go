@@ -23,6 +23,7 @@ type Info struct {
 }
 
 var sites = []Info{
+	{URL: "http://liqi.io", Handler2: handleLiQi},
 	{URL: "https://lepture.com", Handler2: handleLepture},
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
@@ -47,7 +48,6 @@ var sites = []Info{
 	{URL: "https://blog.yitianshijie.net", Handler2: handleYiTianShiJie},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
-	// handleLiQi(p)
 	{
 		URL:       "http://www.carlpullein.com",
 		URLSuffix: "/blog",
@@ -406,5 +406,6 @@ func main() {
 			panic(fmt.Sprintf("missing handler for site: %s\n", site.URL))
 		}
 		site.Handler2(site.URL, p)
+		break
 	}
 }
