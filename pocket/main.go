@@ -11,17 +11,6 @@ import (
 	"time"
 )
 
-// Info stores some basic info for one site
-type Info struct {
-	URL       string               `json:"url"`
-	URLSuffix string               `json:"url_suffix"`
-	ListPath  string               `json:"list_path"`
-	URLPath   string               `json:"url_path"`
-	NextPath  string               `json:"next_path"`
-	Handle    bool                 `json:"handle"`
-	Handler2  func(string, Pocket) `json:"handler_2"`
-}
-
 var sites = []Info{
 	{URL: "http://liqi.io", Handler2: handleLiQi},
 	{URL: "https://lepture.com", Handler2: handleLepture},
@@ -45,6 +34,7 @@ var sites = []Info{
 	{URL: "http://yinwang0.lofter.com", Handler2: handleYinWangLofter},
 	{URL: "http://misscaffeinated.com", Handler2: handleMissCaffeinated},
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
+	{URL: "https://www.dataquest.io/blog", Handler2: handleDataQuest},
 	{URL: "https://blog.yitianshijie.net", Handler2: handleYiTianShiJie},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
@@ -321,6 +311,17 @@ var sites = []Info{
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
 		// Handler:  handleXiaomu,
 	},
+}
+
+// Info stores some basic info for one site
+type Info struct {
+	URL       string               `json:"url"`
+	URLSuffix string               `json:"url_suffix"`
+	ListPath  string               `json:"list_path"`
+	URLPath   string               `json:"url_path"`
+	NextPath  string               `json:"next_path"`
+	Handle    bool                 `json:"handle"`
+	Handler2  func(string, Pocket) `json:"handler_2"`
 }
 
 // read the article about how to get access token:
