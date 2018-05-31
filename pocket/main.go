@@ -9,23 +9,17 @@ import (
 	"os"
 	"strings"
 	"time"
-
-	"github.com/PuerkitoBio/goquery"
 )
 
 // Info stores some basic info for one site
 type Info struct {
-	URL           string                                    `json:"url"`
-	URLSuffix     string                                    `json:"url_suffix"`
-	ListPath      string                                    `json:"list_path"`
-	TitlePath     string                                    `json:"title_path"`
-	URLPath       string                                    `json:"url_path"`
-	NextPath      string                                    `json:"next_path"`
-	NextCondition string                                    `json:"next_condition"`
-	Skip          bool                                      `json:"skip"`
-	Handle        bool                                      `json:"handle"`
-	Handler       func(*goquery.Selection) (string, string) `json:"handler"`
-	Handler2      func(string, Pocket)                      `json:"handler_2"`
+	URL       string               `json:"url"`
+	URLSuffix string               `json:"url_suffix"`
+	ListPath  string               `json:"list_path"`
+	URLPath   string               `json:"url_path"`
+	NextPath  string               `json:"next_path"`
+	Handle    bool                 `json:"handle"`
+	Handler2  func(string, Pocket) `json:"handler_2"`
 }
 
 var sites = []Info{
@@ -53,6 +47,7 @@ var sites = []Info{
 	{URL: "https://blog.yitianshijie.net", Handler2: handleYiTianShiJie},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
+	// handleLiQi(p)
 	{
 		URL:       "http://www.carlpullein.com",
 		URLSuffix: "/blog",
@@ -127,11 +122,11 @@ var sites = []Info{
 		NextPath: "nav.navigation div.nav-previous a",
 	},
 	{
-		URL:           "https://www.iplaysoft.com",
-		ListPath:      "div#postlist div[class][itemtype]",
-		URLPath:       "div.entry-head h2.entry-title a",
-		NextPath:      "div.pagenavi-simple a",
-		NextCondition: "i.ipsicon.ipsicon-next.ipsicon-lspace",
+		URL:      "https://www.iplaysoft.com",
+		ListPath: "div#postlist div[class][itemtype]",
+		URLPath:  "div.entry-head h2.entry-title a",
+		NextPath: "div.pagenavi-simple a",
+		// NextCondition: "i.ipsicon.ipsicon-next.ipsicon-lspace",
 	},
 	{
 		URL:       "https://www.stevepavlina.com",
@@ -163,11 +158,11 @@ var sites = []Info{
 		URLPath:  "a", // remove time in title
 	},
 	{
-		URL:           "http://yuezhu.org",
-		ListPath:      "section.entryTypePostExcerptContainer article[class]",
-		URLPath:       "h2.entryTitle a",
-		NextPath:      "div.posts-pagination a",
-		NextCondition: "span.previous-posts-link",
+		URL:      "http://yuezhu.org",
+		ListPath: "section.entryTypePostExcerptContainer article[class]",
+		URLPath:  "h2.entryTitle a",
+		NextPath: "div.posts-pagination a",
+		// NextCondition: "span.previous-posts-link",
 	},
 	{
 		URL:       "http://blog.leanote.com",
@@ -218,11 +213,11 @@ var sites = []Info{
 		NextPath:  "li.pagination-next a",
 	},
 	{
-		URL:       "https://maqmodo.com",
-		ListPath:  "div.blogpostcategory",
-		TitlePath: "h2.title",
-		URLPath:   "h2.title a",
-		NextPath:  "div.wp-pagenavi a.nextpostslink",
+		URL:      "https://maqmodo.com",
+		ListPath: "div.blogpostcategory",
+		// TitlePath: "h2.title",
+		URLPath:  "h2.title a",
+		NextPath: "div.wp-pagenavi a.nextpostslink",
 	},
 	{
 		URL:      "http://wsfdl.com", // 网址有中文
@@ -244,9 +239,9 @@ var sites = []Info{
 		URL:       "http://www.asianefficiency.com", // something wrong
 		URLSuffix: "/blog",
 		ListPath:  "article[class]",
-		TitlePath: "h1",
-		URLPath:   "h1 a",
-		NextPath:  "nav.archive.pagination div.next a",
+		// TitlePath: "h1",
+		URLPath:  "h1 a",
+		NextPath: "nav.archive.pagination div.next a",
 	},
 	{
 		URL:      "https://deans.site",
@@ -259,87 +254,72 @@ var sites = []Info{
 		URL:      "http://blog.josui.me",
 		ListPath: "div.blog div.content article",
 		NextPath: "nav.pagination a.pagination-next",
-		Skip:     true,
-		Handler:  handleJosuiWritings,
+		// Handler:  handleJosuiWritings,
 	},
 	{
 		URL:      "http://www.yinwang.org",
 		ListPath: "li.list-group-item.title",
-		Skip:     true,
-		Handler:  handleYinWang,
+		// Handler:  handleYinWang,
 	},
-	/*
-		handleLiQi(p)
-	*/
 	{
 		URL:      "http://jannerchang.bitcron.com",
 		ListPath: "div.post_in_list",
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
-		Skip:     true,
-		Handler:  handleJannerChang,
+		// Handler:  handleJannerChang,
 	},
 	{
 		URL:      "https://blog.todoist.com",
 		ListPath: "article.tdb-article-slat",
 		NextPath: "div.tdb-pagination-holder a.next.page-numbers.nav__action",
-		Skip:     true,
-		Handler:  handleTodoist,
+		// Handler:  handleTodoist,
 	},
 	{
 		URL:      "https://ulyssesapp.com/blog",
 		ListPath: "main#main article[id]",
 		NextPath: "nav.navigation.paging-navigation div.nav-previous a",
-		Skip:     true,
-		Handler:  handleUlysses,
+		// Handler:  handleUlysses,
 	},
 	{
 		URL:       "https://www.scotthyoung.com/blog",
 		URLSuffix: "/articles",
 		ListPath:  "div#date-block ul li",
-		Skip:      true,
-		Handler:   handleScottHYoung,
+		// Handler:   handleScottHYoung,
 	},
 	{
 		URL:      "https://startupnextdoor.com",
 		ListPath: "main#content article[class]",
 		NextPath: "nav.pagination a.older-posts",
-		Skip:     true,
-		Handler:  handleStartUpNextDoor,
+		// Handler:  handleStartUpNextDoor,
 	},
 	{
 		URL:      "https://blog.trello.com",
 		ListPath: "div.post-item",
 		NextPath: "div.blog-pagination a.next-posts-link",
-		Skip:     true,
-		Handler:  handleTrello,
+		// Handler:  handleTrello,
 	},
 	{
 		URL:      "http://www.catcoder.com",
 		ListPath: "section#posts article",
 		NextPath: "nav.pagination a.extend.next",
-		Skip:     true,
-		Handler:  handleCatCoder,
+		// Handler:  handleCatCoder,
 	},
 	{
 		URL:      "https://www.waerfa.com",
 		ListPath: "main#main article[id]",
 		NextPath: "nav.navigation.posts-navigation div.nav-previous a",
-		Skip:     true,
-		Handler:  handleWaerfa,
+		// Handler:  handleWaerfa,
 	},
 	{
 		URL:      "https://unee.wang",
 		ListPath: "div.post-list div.mod-post",
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
-		Skip:     true,
-		Handler:  handleUneeWang,
+		// Handler:  handleUneeWang,
 	},
 	{
 		URL:      "https://xiaomu.bitcron.com",
 		ListPath: "div.post",
 		NextPath: "div.paginator.pager.pagination a.btn.next.older-posts.older_posts",
-		Skip:     true,
-		Handler:  handleXiaomu,
+		// Handler:  handleXiaomu,
 	},
 }
 
@@ -408,102 +388,23 @@ func (p Pocket) AddMultiple(urls []string) {
 	if req.StatusCode != 200 {
 		panic(req.Status + " fail to save articles: " + strings.Join(urls, "\n"))
 	}
-	fmt.Printf("[%s] Added %d articles done.\n", time.Now().Format(time.RFC3339), len(urls))
+	fmt.Printf("[%s] Added %d articles done.\n",
+		time.Now().Format(time.RFC3339), len(urls))
 }
 
 // Usage: go run *.go
 func main() {
 	p := NewPocket()
 
-	for _, site := range sites {
-		if site.Skip || !site.Handle {
-			// fmt.Printf("Skipped: %s\n", site.URL)
+	for i, site := range sites {
+		if !site.Handle {
+			fmt.Printf("%2d: [skip] %s\n", i+1, site.URL)
 			continue
 		}
 		fmt.Println("Started:", site.URL)
-		if site.Handler2 != nil {
-			site.Handler2(site.URL, p)
-			continue
+		if site.Handler2 == nil {
+			panic(fmt.Sprintf("missing handler for site: %s\n", site.URL))
 		}
-		url := site.URL + site.URLSuffix
-		total := 0
-		for {
-			doc, err := goquery.NewDocument(url)
-			handleError(err)
-
-			titles, urls := []string{}, []string{}
-			if site.ListPath != "" {
-				list := doc.Find(site.ListPath)
-				list.Each(func(i int, s *goquery.Selection) {
-					var title, post string
-					if site.Handler == nil {
-						var exist bool
-						post, exist = s.Find(site.URLPath).Attr("href")
-						if !exist {
-							fmt.Println(s.Html())
-							panic("missing url")
-						}
-						if site.TitlePath == "" {
-							site.TitlePath = site.URLPath
-						}
-						title, exist = s.Find(site.TitlePath).Attr("title")
-						if !exist {
-							title = s.Find(site.TitlePath).Text()
-						}
-						title = strings.TrimSpace(title)
-					} else {
-						title, post = site.Handler(s)
-					}
-					titles = append(titles, title)
-					if strings.HasPrefix(post, site.URL) {
-						urls = append(urls, post)
-					} else {
-						parts := strings.Split(post, "/")
-						if strings.HasSuffix(site.URL, parts[1]) {
-							urls = append(urls, strings.TrimSuffix(site.URL, "/"+parts[1])+post)
-						} else {
-							urls = append(urls, site.URL+post)
-						}
-					}
-					total++
-				})
-			} else {
-				urls = append(urls, url)
-				titles = append(titles, doc.Find("head title").Text())
-				total++
-			}
-
-			p.AddMultiple(urls)
-			fmt.Printf("[%s] Saved %d articles from site %s to Pocket\n",
-				time.Now().Format("2006-01-02 15:04:05"), len(titles), url)
-			for i := range titles {
-				fmt.Printf("                      %d. %s (%s)\n",
-					i+1, titles[i], urls[i])
-			}
-
-			if site.NextPath == "" {
-				break
-			}
-			next := doc.Find(site.NextPath)
-			if site.NextCondition != "" {
-				next = next.Has(site.NextCondition)
-			}
-			nextURL, exist := next.Attr("href")
-			if !exist {
-				break
-			}
-			if strings.HasPrefix(nextURL, site.URL) {
-				url = nextURL
-				continue
-			} else {
-				parts := strings.Split(nextURL, "/")
-				if strings.HasSuffix(site.URL, parts[1]) {
-					url = strings.TrimSuffix(site.URL, "/"+parts[1]) + nextURL
-				} else {
-					url = site.URL + nextURL
-				}
-			}
-		}
-		fmt.Println("Finished:", site.URL, "( In all:", total, ")")
+		site.Handler2(site.URL, p)
 	}
 }
