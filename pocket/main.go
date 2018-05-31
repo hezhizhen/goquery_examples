@@ -50,14 +50,9 @@ var sites = []Info{
 	{URL: "http://yinwang0.lofter.com", Handler2: handleYinWangLofter},
 	{URL: "http://misscaffeinated.com", Handler2: handleMissCaffeinated},
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
+	{URL: "https://blog.yitianshijie.net", Handler2: handleYiTianShiJie},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
-	{
-		URL:      "https://blog.yitianshijie.net",
-		ListPath: "main#main article[id]",
-		URLPath:  "header.entry-header h1.entry-title a",
-		NextPath: "nav.paging-navigation div.nav-previous a",
-	},
 	{
 		URL:       "http://www.carlpullein.com",
 		URLSuffix: "/blog",
@@ -379,31 +374,6 @@ func NewPocket() Pocket {
 	return p
 }
 
-// Add adds a url to pocket
-// rate limit: 320 times/hour
-func (p Pocket) Add(url string) {
-	body := struct {
-		ConsumerKey string `json:"consumer_key"`
-		AccessToken string `json:"access_token"`
-		URL         string `json:"url"`
-	}{
-		ConsumerKey: p.ConsumerKey,
-		AccessToken: p.AccessToken,
-		URL:         url,
-	}
-	bs, err := json.Marshal(body)
-	handleError(err)
-	req, err := http.Post(
-		"https://getpocket.com/v3/add",
-		"application/json",
-		bytes.NewReader(bs),
-	)
-	handleError(err)
-	if req.StatusCode != 200 {
-		panic(req.Status + "fail to save the article to pocket whose url is:" + url)
-	}
-}
-
 type action struct {
 	Action string `json:"action"`
 	URL    string `json:"url"`
@@ -447,7 +417,7 @@ func main() {
 
 	for _, site := range sites {
 		if site.Skip || !site.Handle {
-			fmt.Printf("Skipped: %s\n", site.URL)
+			// fmt.Printf("Skipped: %s\n", site.URL)
 			continue
 		}
 		fmt.Println("Started:", site.URL)
