@@ -36,6 +36,7 @@ var sites = []Info{
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
 	{URL: "https://www.dataquest.io/blog", Handler2: handleDataQuest},
 	{URL: "https://blog.yitianshijie.net", Handler2: handleYiTianShiJie},
+	{URL: "https://www.everythingcli.org", Handler2: handleEverythingCLI},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
 	{
