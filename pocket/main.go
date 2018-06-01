@@ -40,6 +40,7 @@ var sites = []Info{
 	{URL: "https://www.everythingcli.org", Handler2: handleEverythingCLI},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
+	{URL: "https://blog.stevenocchipinti.com", Handler2: handleStevenOcchipinti},
 	{
 		URL:       "http://www.carlpullein.com",
 		URLSuffix: "/blog",
