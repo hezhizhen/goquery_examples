@@ -14,6 +14,7 @@ import (
 var sites = []Info{
 	{URL: "http://liqi.io", Handler2: handleLiQi},
 	{URL: "https://lepture.com", Handler2: handleLepture},
+	{URL: "http://lihaoquan.me/", Handler2: handleLiHaoQuan},
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
 	{URL: "http://www.ibtsat.com", Handler2: handleIBTSAT}, // TODO: not yet
