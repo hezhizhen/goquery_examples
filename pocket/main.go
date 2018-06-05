@@ -15,6 +15,7 @@ var sites = []Info{
 	// HTTP
 	{URL: "http://liqi.io", Handler2: handleLiQi},
 	{URL: "http://johng.cn", Handler2: handleJohng},
+	{URL: "http://blog.xiayf.cn", Handler2: handleXiayf},
 	{URL: "http://lihaoquan.me/", Handler2: handleLiHaoQuan},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
 	{URL: "http://www.ibtsat.com", Handler2: handleIBTSAT}, // TODO: not yet
