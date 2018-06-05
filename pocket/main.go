@@ -23,6 +23,7 @@ var sites = []Info{
 	{URL: "http://gravitysworm.com", Handler2: handleGravitySworm},
 	{URL: "http://nladuo.github.io/", Handler2: handleNladuo},
 	{URL: "http://www.mikewootc.com/", Handler2: handleMikeWootc},
+	{URL: "http://www.carlpullein.com", Handler2: handleCarlPullein},
 	{URL: "http://yinwang0.lofter.com", Handler2: handleYinWangLofter},
 	{URL: "http://misscaffeinated.com", Handler2: handleMissCaffeinated},
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
@@ -48,13 +49,6 @@ var sites = []Info{
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
 	{URL: "https://blog.stevenocchipinti.com", Handler2: handleStevenOcchipinti},
-	{
-		URL:       "http://www.carlpullein.com",
-		URLSuffix: "/blog",
-		ListPath:  "div#content div.main-content article[class]",
-		URLPath:   "div.post h1.entry-title a",
-		NextPath:  "nav.page.pagination li.next a#nextLink",
-	},
 	{
 		URL:      "http://haohailong.net",
 		ListPath: "div.posts div[id] div.post-inner div.post-header",
