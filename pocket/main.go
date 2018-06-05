@@ -14,6 +14,7 @@ import (
 var sites = []Info{
 	// HTTP
 	{URL: "http://liqi.io", Handler2: handleLiQi},
+	{URL: "http://johng.cn", Handler2: handleJohng},
 	{URL: "http://lihaoquan.me/", Handler2: handleLiHaoQuan},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
 	{URL: "http://www.ibtsat.com", Handler2: handleIBTSAT}, // TODO: not yet
@@ -30,6 +31,7 @@ var sites = []Info{
 	// HTTPS
 	{URL: "https://lepture.com", Handler2: handleLepture},
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
+	{URL: "https://golangbot.com", Handler2: handleGolangBot},
 	{URL: "https://dave.cheney.net", Handler2: handleCheney},
 	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
 	{URL: "https://blog.golang.org", Handler2: handleGolangBlog},
