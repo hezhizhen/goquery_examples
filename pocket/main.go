@@ -33,6 +33,7 @@ var sites = []Info{
 	// HTTPS
 	{URL: "https://lepture.com", Handler2: handleLepture},
 	{URL: "https://tonybai.com", Handler2: handleTonyBai},
+	{URL: "https://xiaozhou.net", Handler2: handleXiaoZhou},
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
 	{URL: "https://golangbot.com", Handler2: handleGolangBot},
 	{URL: "https://dave.cheney.net", Handler2: handleCheney},
