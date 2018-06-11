@@ -42,6 +42,7 @@ var sites = []Info{
 	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
 	{URL: "https://blog.golang.org", Handler2: handleGolangBlog},
 	{URL: "https://jamesstuber.com", Handler2: handleJamesStuber},
+	{URL: "https://tech.meituan.com", Handler2: handleMeiTuan},
 	{URL: "https://blog.merovius.de", Handler2: handleMerovius},
 	{URL: "https://bitsplitting.org", Handler2: handleBitsplitting},
 	{URL: "https://marcjenkins.co.uk", Handler2: handleMarcJenkins},
