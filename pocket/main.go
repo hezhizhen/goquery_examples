@@ -22,6 +22,7 @@ var sites = []Info{
 	{URL: "http://www.ibtsat.com", Handler2: handleIBTSAT}, // TODO: not yet
 	{URL: "http://blog.yfgeek.com", Handler2: handleYfGeek},
 	{URL: "http://www.readern.com", Handler2: handleReadErn},
+	{URL: "http://www.rosipov.com", Handler2: handleROsipov},
 	{URL: "http://www.flysnow.org", Handler2: handleFlySnow},
 	{URL: "http://blog.mgechev.com", Handler2: handleMgechev},
 	{URL: "http://gravitysworm.com", Handler2: handleGravitySworm},
@@ -40,8 +41,9 @@ var sites = []Info{
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
 	{URL: "https://golangbot.com", Handler2: handleGolangBot},
 	{URL: "https://adamdrake.com", Handler2: handleAdamDrake},
+	{URL: "https://zfanw.com/blog", Handler2: handleZFanW},
+	{URL: "https://blog.zfanw.com", Handler2: handleZFanW2},
 	{URL: "https://www.4async.com", Handler2: handle4Async},
-	{URL: "http://www.rosipov.com", Handler2: handleROsipov},
 	{URL: "https://dave.cheney.net", Handler2: handleCheney},
 	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
 	{URL: "https://blog.golang.org", Handler2: handleGolangBlog},
