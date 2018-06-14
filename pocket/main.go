@@ -26,6 +26,7 @@ var sites = []Info{
 	{URL: "http://www.readern.com", Handler2: handleReadErn},
 	{URL: "http://www.rosipov.com", Handler2: handleROsipov},
 	{URL: "http://www.flysnow.org", Handler2: handleFlySnow},
+	{URL: "http://openmymind.net/", Handler2: handleOpenMyMind},
 	{URL: "http://blog.mgechev.com", Handler2: handleMgechev},
 	{URL: "http://gravitysworm.com", Handler2: handleGravitySworm},
 	{URL: "http://nladuo.github.io/", Handler2: handleNladuo},
@@ -429,7 +430,7 @@ func main() {
 
 	for i, site := range sites {
 		if !site.Handle {
-			fmt.Printf("%2d: [skip] %s\n", i+1, site.URL)
+			fmt.Printf("%3d: [skip] %s\n", i+1, site.URL)
 			continue
 		}
 		fmt.Println("Started:", site.URL)
