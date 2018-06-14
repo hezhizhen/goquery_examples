@@ -35,6 +35,7 @@ var sites = []Info{
 	{URL: "http://appshere.bitcron.com", Handler2: handleAppShere},
 	// HTTPS
 	{URL: "https://wzyboy.im", Handler2: handleWzyBoy},
+	{URL: "https://wdxtub.com", Handler2: handleWdxtub},
 	{URL: "https://lepture.com", Handler2: handleLepture},
 	{URL: "https://tonybai.com", Handler2: handleTonyBai},
 	{URL: "https://xiaozhou.net", Handler2: handleXiaoZhou},
