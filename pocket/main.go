@@ -16,6 +16,7 @@ var sites = []Info{
 	{URL: "http://liqi.io", Handler2: handleLiQi},
 	{URL: "http://johng.cn", Handler2: handleJohng},
 	{URL: "http://fangkc.cn", Handler2: handleFangkc},
+	{URL: "http://foocoder.com", Handler2: handleFoocoder},
 	{URL: "http://blog.xiayf.cn", Handler2: handleXiayf},
 	{URL: "http://lihaoquan.me/", Handler2: handleLiHaoQuan},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
