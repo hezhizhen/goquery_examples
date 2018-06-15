@@ -74,6 +74,7 @@ var sites = []Info{
 	{URL: "https://blog.yitianshijie.net", Handler2: handleYiTianShiJie},
 	{URL: "https://www.everythingcli.org", Handler2: handleEverythingCLI},
 	{URL: "https://leetcode.com/articles", Handler2: handleLeetcodeArticle},
+	{URL: "https://www.ardanlabs.com/blog", Handler2: handleArdanLabs},
 	{URL: "https://kingdomhe.wordpress.com", Handler2: handleKingdomhe},
 	{URL: "https://itimetraveler.github.io", Handler2: handleITimeTraveler},
 	{URL: "https://illidiumq36.wordpress.com", Handler2: handleIllidiumq36},
