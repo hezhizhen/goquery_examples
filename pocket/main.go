@@ -50,6 +50,7 @@ var sites = []Info{
 	{URL: "https://zfanw.com/blog", Handler2: handleZFanW},
 	{URL: "https://blog.zfanw.com", Handler2: handleZFanW2},
 	{URL: "https://www.4async.com", Handler2: handle4Async},
+	{URL: "https://www.calhoun.io", Handler2: handleCalhoun},
 	{URL: "https://blog.chewxy.com", Handler2: handleChewxy},
 	{URL: "https://dave.cheney.net", Handler2: handleCheney},
 	{URL: "https://blog.ropnop.com", Handler2: handleRopnop},
