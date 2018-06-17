@@ -14,6 +14,7 @@ import (
 var sites = []Info{
 	// HTTP
 	{URL: "http://liqi.io", Handler2: handleLiQi},
+	{URL: "http://wanqu.co", Handler2: handleWanQu},
 	{URL: "http://johng.cn", Handler2: handleJohng},
 	{URL: "http://fangkc.cn", Handler2: handleFangkc},
 	{URL: "http://xiaorui.cc", Handler2: handleXiaoRui},
