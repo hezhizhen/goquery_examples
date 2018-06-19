@@ -25,6 +25,7 @@ var sites = []Info{
 	{URL: "http://xiaqunfeng.cc", Handler2: handleXiaQunFeng},
 	{URL: "http://www.ibtsat.com", Handler2: handleIBTSAT}, // TODO: not yet
 	{URL: "http://blog.yfgeek.com", Handler2: handleYfGeek},
+	{URL: "http://www.gtdlife.com", Handler2: handleGTDLife},
 	{URL: "http://www.readern.com", Handler2: handleReadErn},
 	{URL: "http://www.rosipov.com", Handler2: handleROsipov},
 	{URL: "http://www.flysnow.org", Handler2: handleFlySnow},
