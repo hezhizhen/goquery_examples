@@ -83,6 +83,7 @@ var sites = []Info{
 	{URL: "https://itimetraveler.github.io", Handler2: handleITimeTraveler},
 	{URL: "https://illidiumq36.wordpress.com", Handler2: handleIllidiumq36},
 	{URL: "https://blog.stevenocchipinti.com", Handler2: handleStevenOcchipinti},
+	{URL: "https://go101.org/article/101.html", Handler2: handleGo101},
 	{URL: "https://www.douban.com/people/4553925/notes?start=0&type=note", Handler2: handleMissPower},
 	{
 		URL:      "http://haohailong.net",
