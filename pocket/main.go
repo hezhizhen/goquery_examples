@@ -74,6 +74,7 @@ var sites = []Info{
 	{URL: "https://sheepbao.github.io", Handler2: handleSheepBao},
 	{URL: "https://blog.just4fun.site", Handler2: handleJust4Fun},
 	{URL: "https://blog.agilebits.com", Handler2: handleAgilebits},
+	{URL: "https://www.playpcesor.com", Handler2: handlePlayPCEsor},
 	{URL: "https://www.kawabangga.com", Handler2: handleKawabangga},
 	{URL: "https://www.macstories.net", Handler2: handleMacStories},
 	{URL: "https://www.discoverdev.io", Handler2: handleDiscoverDev},
