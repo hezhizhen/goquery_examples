@@ -20,6 +20,7 @@ var sites = []Info{
 	{URL: "http://xiaorui.cc", Handler2: handleXiaoRui},
 	{URL: "http://foocoder.com", Handler2: handleFoocoder},
 	{URL: "http://blog.xiayf.cn", Handler2: handleXiayf},
+	{URL: "http://air.googol.im", Handler2: handleAirOnG},
 	{URL: "http://lihaoquan.me/", Handler2: handleLiHaoQuan},
 	{URL: "http://sanyuesha.com", Handler2: handleSanYueSha},
 	{URL: "http://xiaqunfeng.cc", Handler2: handleXiaQunFeng},
