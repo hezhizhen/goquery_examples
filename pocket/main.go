@@ -47,6 +47,7 @@ var sites = []Info{
 	{URL: "https://lepture.com", Handler2: handleLepture},
 	{URL: "https://tonybai.com", Handler2: handleTonyBai},
 	{URL: "https://xiaozhou.net", Handler2: handleXiaoZhou},
+	{URL: "https://liyang85.com", Handler2: handleLiYang85},
 	{URL: "https://cindysss.com", Handler2: handleCindysss},
 	{URL: "https://golangbot.com", Handler2: handleGolangBot},
 	{URL: "https://adamdrake.com", Handler2: handleAdamDrake},
