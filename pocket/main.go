@@ -46,6 +46,7 @@ var sites = []Info{
 	{URL: "http://mypaper.pchome.com.tw/zerojudge", Handler2: handleZeroJudge},
 	{URL: "http://www.csie.ntnu.edu.tw/~u91029/index.html", Handler2: handleAlgorithmNote},
 	// HTTPS
+	{URL: "https://jesor.me", Handler2: handleJesor},
 	{URL: "https://wzyboy.im", Handler2: handleWzyBoy},
 	{URL: "https://wdxtub.com", Handler2: handleWdxtub},
 	{URL: "https://lepture.com", Handler2: handleLepture},
